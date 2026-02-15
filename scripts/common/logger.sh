@@ -19,24 +19,25 @@ readonly LOG_RETENTION_DAYS=30
 mkdir -p "$LOG_DIR"
 
 # --- COLOR DEFINITIONS ---
+# Only set colors if not already defined (allows colors.sh to override)
 if [[ -t 1 ]]; then
-    readonly COLOR_RED='\033[0;31m'
-    readonly COLOR_GREEN='\033[0;32m'
-    readonly COLOR_YELLOW='\033[1;33m'
-    readonly COLOR_BLUE='\033[0;34m'
-    readonly COLOR_MAGENTA='\033[0;35m'
-    readonly COLOR_CYAN='\033[0;36m'
-    readonly COLOR_BOLD='\033[1m'
-    readonly COLOR_RESET='\033[0m'
+    : "${COLOR_RED:='\033[0;31m'}"
+    : "${COLOR_GREEN:='\033[0;32m'}"
+    : "${COLOR_YELLOW:='\033[1;33m'}"
+    : "${COLOR_BLUE:='\033[0;34m'}"
+    : "${COLOR_MAGENTA:='\033[0;35m'}"
+    : "${COLOR_CYAN:='\033[0;36m'}"
+    : "${COLOR_BOLD:='\033[1m'}"
+    : "${COLOR_RESET:='\033[0m'}"
 else
-    readonly COLOR_RED=''
-    readonly COLOR_GREEN=''
-    readonly COLOR_YELLOW=''
-    readonly COLOR_BLUE=''
-    readonly COLOR_MAGENTA=''
-    readonly COLOR_CYAN=''
-    readonly COLOR_BOLD=''
-    readonly COLOR_RESET=''
+    : "${COLOR_RED:=''}"
+    : "${COLOR_GREEN:=''}"
+    : "${COLOR_YELLOW:=''}"
+    : "${COLOR_BLUE:=''}"
+    : "${COLOR_MAGENTA:=''}"
+    : "${COLOR_CYAN:=''}"
+    : "${COLOR_BOLD:=''}"
+    : "${COLOR_RESET:=''}"
 fi
 
 # --- LOGGING FUNCTIONS ---
@@ -81,6 +82,49 @@ log_warn()    { log WARN "$*"; }
 log_error()   { log ERROR "$*"; }
 log_debug()   { log DEBUG "$*"; }
 log_run()     { log RUN "$*"; }
+
+# Additional documented API functions
+log_warning() { log_warn "$@"; }
+
+log_critical() {
+    local message="$1"
+    local exit_code="${2:-1}"
+    log ERROR "CRITICAL: $message"
+    exit "$exit_code"
+}
+
+log_section() {
+    local title="$1"
+    echo ""
+    echo -e "${COLOR_BOLD}${COLOR_Mauve}═══════════════════════════════════════${COLOR_RESET}"
+    echo -e "${COLOR_BOLD}${COLOR_Mauve}  $title${COLOR_RESET}"
+    echo -e "${COLOR_BOLD}${COLOR_Mauve}═══════════════════════════════════════${COLOR_RESET}"
+    echo ""
+    log INFO "=== SECTION: $title ==="
+}
+
+log_subsection() {
+    local title="$1"
+    echo -e "${COLOR_CYAN}━━━ $title ━━━${COLOR_RESET}"
+    log INFO "--- Subsection: $title ---"
+}
+
+log_progress() {
+    local message="$1"
+    echo -e "${COLOR_CYAN}➤ $message${COLOR_RESET}"
+    log INFO "[PROGRESS] $message"
+}
+
+log_command() {
+    local cmd="$*"
+    echo -e "${COLOR_GRAY}\$ $cmd${COLOR_RESET}"
+    log INFO "[COMMAND] $cmd"
+}
+
+# Wrapper for rotate_logs to match documentation
+log_rotate() {
+    rotate_logs
+}
 
 # --- LOG ROTATION ---
 rotate_logs() {
@@ -169,6 +213,27 @@ clean_old_logs() {
 
 # Initialize: Rotate old logs
 rotate_logs
+
+# --- EXPORT FUNCTIONS ---
+export -f log_info
+export -f log_success
+export -f log_warn
+export -f log_warning
+export -f log_error
+export -f log_debug
+export -f log_critical
+export -f log_section
+export -f log_subsection
+export -f log_progress
+export -f log_command
+export -f log_rotate
+export -f log_recent
+export -f log_last_errors
+export -f log_last_warns
+export -f log_stats
+export -f log_tail
+export -f start_log_session
+export -f end_log_session
 
 # Export functions for use in other scripts
 export -f log

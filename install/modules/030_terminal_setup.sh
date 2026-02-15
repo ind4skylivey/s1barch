@@ -77,7 +77,7 @@ fi
 # Install terminal tools
 log_info "Installing terminal tools..."
 
-local term_tools=(
+term_tools=(
     "tmux"         # Terminal multiplexer
     "zellij"        # Modern terminal multiplexer
     "neovim"        # Modern editor

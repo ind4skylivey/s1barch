@@ -224,7 +224,7 @@ cleanup_old_snapshots() {
         
         # Delete oldest snapshots
         ls -1t "$SNAPSHOTS_DIR" | tail -n $delete_count | while read snapshot; do
-            rm -rf "$SNAPSHOTS_DIR/$snapshot"
+            rm -rf "${SNAPSHOTS_DIR:?}/${snapshot:?}"
             log_debug "Removed old snapshot: $snapshot"
         done
     fi

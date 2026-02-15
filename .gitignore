@@ -1,0 +1,150 @@
+# ============================================================
+#  S1Bs1stem - GITIGNORE
+#  ============================================================
+#  Purpose: Exclude sensitive, temporary, and generated files
+#  Security: Prevents committing sensitive data and binaries
+#  ============================================================
+
+# --- LOGS ---
+*.log
+*.log.*
+.s1b_logs/
+~/.s1b_logs/
+logs/
+
+# --- STATE FILES ---
+*.state
+.s1b_install_state
+.s1b_install_*.log
+install/.env_selection
+install/.custom_selection
+install/.env_selection_*
+
+# --- BACKUP FILES ---
+*.bak
+*.backup
+*.old
+*~
+backup_*
+.s1b_backup*/
+~/.s1b_backup*/
+
+# --- LOCK FILES ---
+*.lock
+*.pid
+/tmp/s1b_*
+.s1b_*.lock
+
+# --- TEMPORARY FILES ---
+*.tmp
+*.temp
+*.swp
+*.swo
+.cache/
+tmp/
+temp/
+
+# --- OS-SPECIFIC ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# --- EDITOR/IDE ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.history/
+
+# --- SENSITIVE DATA ---
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+secrets.json
+secrets.yaml
+secrets.yml
+config/secrets/
+**/secrets/
+*secret*
+
+# --- PERSONAL CONFIGS ---
+~/.config/
+~/.local/share/s1b/
+~/.local/share/clipboard/
+~/.cache/s1b/
+
+# --- AUDIO/BATTERY STATE ---
+~/.s1b_audio_state
+~/.s1b_battery_state
+~/.s1b_lid_state
+~/.s1b_wallpaper_history
+~/.local/share/s1b/battery/
+
+# --- AUTOSTART/SESSION FILES ---
+~/.s1b_autostart_lock
+~/.s1b_sessions/
+~/.s1b_sessions/*
+
+# --- SYSTEM-SPECIFIC ---
+*.desktop
+~/.config/autostart/s1b*.desktop
+*.desktop.user
+*.desktop.*.bak
+
+# --- COMPILED/BINARY FILES (if any) ---
+*.o
+*.so
+*.a
+*.dylib
+*.exe
+*.dll
+*.bin
+*.out
+
+# --- NODE/PYTHON/CARGO (if any dev deps) ---
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+target/
+Cargo.lock
+
+# --- TEST/CI ARTIFACTS ---
+*.test
+*.spec
+coverage/
+.nyc_output/
+test-results/
+artifacts/
+
+# --- DOCUMENTATION BUILDS ---
+docs/_build/
+docs/.doctrees/
+site/
+
+# --- INSTALLATION ARTIFACTS ---
+*.deb
+*.rpm
+*.tar.gz
+*.tar.xz
+*.zip
+*.pkg.tar.zst
+
+# --- CONFIGURATION COPIES (dotfiles-s1b refs) ---
+dotfiles-s1b/
+*.gitkeep
+**/github_token*

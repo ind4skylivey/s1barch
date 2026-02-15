@@ -1,37 +1,120 @@
-# S1Bs1stem
+<div align="center">
 
-**🚀 Sistema de Automatización Avanzado para Arch Linux + DWM**
+<!-- Hero Banner -->
+<img width="2688" height="1536" alt="banner" src="https://github.com/user-attachments/assets/98e29bde-61f1-439d-940d-abbefc05fb06" />
 
-Inspirado por el proyecto [S1B](https://github.com/dusklinux/s1b), adaptado para ecosistemas DWM/Zellij/Eco-Workflow.
+# 🚀 S1Bs1stem
+**Advanced Automation System for Arch Linux + DWM**
 
-## 📋 Table of Contents
+ [![Arch Linux](https://img.shields.io/badge/Arch_Linux-Distro-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)](https://archlinux.org)
+ [![Version](https://img.shields.io/badge/Version-1.6.0-blue?style=for-the-badge)](https://github.com/ind4skylivey/s1barch/releases)
+ [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+ [![Maintained](https://img.shields.io/badge/Maintained-Yes-2ea44f?style=for-the-badge)](https://github.com/ind4skylivey/s1barch)
+ [![DWM](https://img.shields.io/badge/DWM-Patched-blueviolet?style=for-the-badge)](https://dwm.suckless.org/)
+ [![Zellij](https://img.shields.io/badge/Zellij-Workflow-orange?style=for-the-badge&logo=zellij)](https://zellij.dev)
+ <br/>
+ [![Shellcheck](https://github.com/ind4skylivey/s1barch/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/ind4skylivey/s1barch/actions/workflows/shellcheck.yml)
+ [![Security](https://github.com/ind4skylivey/s1barch/actions/workflows/security.yml/badge.svg)](https://github.com/ind4skylivey/s1barch/actions/workflows/security.yml)
+ [![Integration](https://github.com/ind4skylivey/s1barch/actions/workflows/integration.yml/badge.svg)](https://github.com/ind4skylivey/s1barch/actions/workflows/integration.yml)
 
-- [About](#-about)
-- [Features](#-features)
-- [Quick Start](#-quick-start)
-- [Project Structure](#-project-structure)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Workflows](#-workflows)
-- [Contributing](#-contributing)
-- [License](#-license)
+[🚀 Quick Install](#-quick-install) • [📖 Documentation](docs/) • [🐛 Report Bug](https://github.com/ind4skylivey/s1barch/issues)
+
+A complete orchestration layer for Arch Linux, seamlessly integrated with [dotfiles-s1b](https://github.com/ind4skylivey/dotfiles-s1b).
+
+</div>
+
+---
+
+## 📑 Table of Contents
+
+- [⚡ About](#-about)
+- [🧠 Eco-Workflow Architecture](#-eco-workflow-architecture)
+- [✨ Features](#-features)
+- [📊 Technical Specifications](#-technical-specifications)
+- [🌌 Environment Selection](#-environment-selection)
+- [🚀 Quick Start](#-quick-start)
+- [🏗️ Project Structure](#-project-structure)
+- [🔧 Installation](#-installation)
+- [📚 Usage](#-usage)
+- [🧠 Workflows](#-workflows)
+- [🎨 Customization](#-customization)
+- [🐛 Troubleshooting](#-troubleshooting)
+- [🗺️ Roadmap](#-roadmap)
+- [🤝 Contributing](#-contributing)
+- [📝 License](#-license)
 
 ---
 
 ## ⚡ About
 
-**S1Bs1stem** es más que configuraciones de dotfiles; es una **capa de orquestación completa** diseñada para desarrolladores, investigadores de seguridad y usuarios de Linux que buscan un entorno minimalista pero altamente funcional.
+**S1Bs1stem** is more than dotfile configurations; it's a **complete orchestration layer** designed for developers, security researchers, and Linux users seeking a minimalist yet highly functional environment.
+
+Built from the ground up to provide a reproducible, automated installation of a complete Arch Linux desktop environment with DWM (Dynamic Window Manager).
+
+### Integration with dotfiles-s1b
+
+This project works seamlessly with [dotfiles-s1b](https://github.com/ind4skylivey/dotfiles-s1b), providing the orchestration and automation layer while dotfiles-s1b provides the actual configuration files and themes.
+
+```
+S1Bs1stem (Orchestration) + dotfiles-s1b (Configurations) = Complete System
+```
+
+> [!TIP]
+> **Core Philosophy**
+> *Minimal intrusion, maximum reproducibility. Tools should adapt to the user's intent, not the other way around.*
 
 ### Core Philosophy
 
-- **Minimal Intrusion:** Las herramientas deben adaptarse a la intención del usuario, no al revés
-- **Maximum Reproducibility:** Scripts modulares y validación robusta
-- **Safety First:** Pre-flight checks, rollback system, y logging avanzado
-- **Eco-Workflow:** Context-aware sessions (Local, Remote, Write, RedTeam)
+| Principle | Description |
+|:---|:---|
+| **🎯 Minimal Intrusion** | Tools should adapt to user intent, not the other way around |
+| **🔄 Maximum Reproducibility** | Modular scripts and robust validation |
+| **🛡️ Safety First** | Pre-flight checks, rollback system, and advanced logging |
+| **🌐 Eco-Workflow** | Context-aware sessions (Local, Remote, Write, RedTeam) |
 
-### Inspired by
+---
 
-Este proyecto está inspirado en [S1B dotfiles](https://github.com/dusklinux/s1b) y adapta su arquitectura de orquestación a ecosistemas DWM/Zellij en lugar de Hyprland/Waybar.
+## 🧠 Eco-Workflow Architecture
+
+The heart of this setup is the **Orchestration Layer**. Instead of launching tools directly, you launch **Contexts**.
+
+<div align="center">
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+graph TD
+    User((User)) -->|Selects| Menu[ws-menu / Rofi]
+    Menu -->|Dev| Local[ws-local]
+    Menu -->|Ops| Remote[ws-remote]
+    Menu -->|Write| Write[ws-write]
+    Menu -->|Security| Red[ws-redteam]
+
+    Local -->|Spawns| Zellij[Zellij Layouts]
+    Remote -->|Spawns| Tmux[Tmux Persistent]
+    Write -->|Spawns| Emacs[Doom Emacs Daemon]
+    Red -->|Spawns| Docker[Containerized Env]
+
+    Zellij -->|Tools| ZellijTools[Neovim, Kitty, Git]
+    Tmux -->|Tools| TmuxTools[SSH, tmux, Vim]
+    Emacs -->|Tools| EmacsTools[Org-mode, LaTeX, Markdown]
+    Docker -->|Tools| DockerTools[Podman, Burp, Ghidra]
+```
+
+</div>
+
+<div align="center">
+
+| Context | Command | Engine | Purpose |
+|:---:|:---:|:---:|:---|
+| **Development** | `ws-local` | **Zellij** | Coding, file management, and local testing. |
+| **Infrastructure** | `ws-remote` | **Tmux** | Persistent SSH sessions and server management. |
+| **Deep Work** | `ws-write` | **Emacs** | Distraction-free writing and Org-mode planning. |
+| **Red Team** | `ws-redteam** | **Docker** | Isolated environments for security research/CTF. |
+
+</div>
+
+> [!NOTE]
+> **Learn more:** Read the full [Eco-Workflow Guide](docs/Workflows.md).
 
 ---
 
@@ -39,39 +122,77 @@ Este proyecto está inspirado en [S1B dotfiles](https://github.com/dusklinux/s1b
 
 ### Orchestration System
 
-- ✅ **Pre-flight Validation:** Verificación completa antes de instalación
-- ✅ **State Management:** Resume capability - continúa donde lo dejaste
-- ✅ **Retry Loops:** Scripts fallan con reintentos automáticos
-- ✅ **Interactive Mode:** Modo interactivo para mayor control
-- ✅ **Dry-run Mode:** Vista previa de acciones sin ejecutar nada
-- ✅ **Rollback System:** Snapshots y restauración de configuraciones
+<div align="center">
 
-### Common Libraries
+| Feature | Status | Description |
+|:---|:---:|:---|
+| **Pre-flight Validation** | ✅ Complete | Complete verification before installation |
+| **State Management** | ✅ Complete | Resume capability - continue where you left off |
+| **Retry Loops** | ✅ Complete | Scripts fail with automatic retries |
+| **Interactive Mode** | ✅ Complete | Interactive mode for greater control |
+| **Dry-run Mode** | ✅ Complete | Preview of actions without executing anything |
+| **Rollback System** | ✅ Complete | Snapshots and configuration restoration |
 
-- ✅ **Functions Library:** Funciones comunes reutilizables
-- ✅ **Logger System:** Logging con colores, timestamps, y rotación de logs
-- ✅ **Validator System:** Validación de dependencias y sistema
-- ✅ **Color System:** Tema Catppuccin Mauve consistente
-- ✅ **Rollback System:** Gestión completa de snapshots
+</div>
 
-### Modular Scripts
+### Hardware Detection System
 
-- ✅ **Audio:** audio_switch.sh, mic_switch.sh, volume_slider.sh
-- ✅ **Battery:** battery_notify.sh, power_saver.sh
-- ✅ **Display:** wallpaper_cycle.sh, brightness_slider.sh, screenshot_manager.sh
-- ✅ **Networking:** vpn_connect.sh, wifi_switch.sh, network_status.sh
-- ✅ **DWM:** toggle_floating.sh, window_rules.sh, dwm_autostart.sh
-- ✅ **Waybar:** git_status.sh, uptime.sh, vpn_status.sh, cpu/memory/disk monitoring
-- ✅ **Workflow:** ws-local.sh, ws-remote.sh, ws-write.sh, ws-redteam.sh
-- ✅ **Security:** scan_commit.sh, malware_analysis.sh, quick_scan.sh
-- ✅ **Rofi:** powermenu.sh, launcher.sh, emoji.sh
+<div align="center">
 
-### Eco-Workflow System
+| Detection | Method | Scripts Using |
+|:---|:---:|:---:|
+| **Battery** | `upower -e` | Battery scripts (auto-skip on desktop) |
+| **Lid** | `/proc/acpi/button/lid/` | Lid handling (auto-skip on desktop) |
+| **Audio System** | `pactl info`, `pw-cli` | All audio scripts |
+| **DWM Running** | `pgrep dwm` | DWM-specific scripts |
+| **Waybar Running** | `pgrep waybar` | Waybar scripts |
 
-- 🖥️ **Local Development:** Neovim + Zellij + Kitty para desarrollo local
-- 🌐 **Remote Server:** Tmux + SSH sessions para servidores remotos
-- 📝 **Deep Write:** Doom Emacs + Yazi para escritura sin distracciones
-- 🛡️ **Red Team:** Zellij + Podman para investigación de seguridad
+</div>
+
+### Automation Scripts
+
+<div align="center">
+
+| Category | Scripts | Description | Status |
+|:---|:---:|:---:|:---:|
+| **🎵 Audio** | 5 scripts | Volume, mic, output switching (PipeWire/PulseAudio) | ✅ |
+| **🔋 Battery** | 6 scripts | Monitor, notify, power saver, lid handling, charge limiter | ✅ |
+| **🖼️ Display** | 2 scripts | Screenshot (4 modes), wallpaper cycling | ✅ |
+| **🪟 DWM** | 4 scripts | Window control, rules, autostart (desktop/laptop profiles) | ✅ |
+| **🌐 Networking** | 7 scripts | Status, meter, DNS, VPN, WiFi, Tailscale, iPhone VNC | ✅ |
+| **⚙️ System** | 7 scripts | Cleanup, disk usage, logs, maintenance, packages, services, info | ✅ |
+
+</div>
+
+---
+
+## 📊 Technical Specifications
+
+### System Requirements
+
+<div align="center">
+
+| Requirement | Minimum | Recommended |
+|:---|:---|:---|
+| **Operating System** | Arch Linux | Arch Linux / CachyOS |
+| **RAM** | 4GB | 8GB+ |
+| **Storage** | 5GB free | 20GB+ SSD |
+| **Shell** | ZSH or Fish | ZSH |
+| **Window Manager** | DWM | DWM (patched) |
+
+</div>
+
+### Tech Stack
+
+| Component | Technology | Version |
+|:---|:---|:---:|
+| **Window Manager** | DWM | 6.4+ |
+| **Terminal** | Kitty / Alacritty / Warp | Latest |
+| **Shell** | ZSH / Fish | 5.8+ / 3.6+ |
+| **Multiplexer** | Zellij / Tmux | Latest |
+| **Editor** | Neovim / Doom Emacs | 0.9+ / 29+ |
+| **Theme** | Catppuccin | Mauve |
+| **Language** | Bash | 4.0+ |
 
 ---
 
@@ -79,23 +200,29 @@ Este proyecto está inspirado en [S1B dotfiles](https://github.com/dusklinux/s1b
 
 ### Prerequisites
 
-- Arch Linux (o Arch-based como CachyOS)
-- DWM instalado
-- ZSH o Fish shell
-- Conexión a internet
-- Mínimo 5GB de espacio libre
+<div align="center">
+
+| Requirement | Details |
+|:---|:---|
+| **🐧 OS** | Arch Linux (or Arch-based like CachyOS) |
+| **🪟 WM** | DWM installed |
+| **🐚 Shell** | ZSH or Fish shell |
+| **🌐 Network** | Internet connection |
+| **💾 Storage** | Minimum 5GB of free space |
+
+</div>
 
 ### One-Line Installation
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/ind4skylivey/S1Bs1stem/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/ind4skylivey/s1barch/main/install.sh)
 ```
 
 ### Manual Installation
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/ind4skylivey/S1Bs1stem.git ~/Desktop/S1Bs1stem
+git clone https://github.com/ind4skylivey/s1barch.git ~/Desktop/S1Bs1stem
 
 # 2. Navigate to directory
 cd ~/Desktop/S1Bs1stem
@@ -107,11 +234,14 @@ cd ~/Desktop/S1Bs1stem
 ### Post-Installation
 
 ```bash
-# 1. Logout and login (aplicar shell)
+# 1. Logout and login (apply shell)
 # 2. Restart DWM
 # 3. Run verification
 s1b-doctor
 ```
+
+> [!TIP]
+> **First Steps:** After installation, run `ws-menu` to launch the workflow menu and select your first context.
 
 ---
 
@@ -119,264 +249,63 @@ s1b-doctor
 
 ```
 S1Bs1stem/
-├── install/                      # Sistema de instalación
-│   ├── ORCHESTRA.sh            # Script maestro
+├── install/                      # Installation system
+│   ├── ORCHESTRA.sh            # Master script (conductor)
 │   ├── preflight/               # Pre-flight checks
-│   ├── modules/                  # Módulos de instalación
-│   ├── post_install/             # Post-instalación
-│   └── rollback/                # Sistema de rollback
-├── scripts/                     # Todos los scripts organizados
-│   ├── common/                  # Librerías comunes
-│   │   ├── functions.sh          # Funciones base
-│   │   ├── logger.sh            # Sistema de logging
-│   │   ├── validator.sh          # Validación
-│   │   ├── colors.sh            # Colores Catppuccin
-│   │   └── rollback.sh          # Sistema de snapshots
-│   ├── audio/                   # Scripts de audio
-│   ├── battery/                 # Scripts de batería
-│   ├── display/                 # Scripts de monitor
-│   ├── networking/              # Scripts de red
-│   ├── dwm/                    # Scripts DWM
-│   ├── waybar/                 # Scripts Waybar
-│   ├── workflow/                # Scripts Eco-Workflow
-│   ├── security/                # Scripts seguridad
-│   ├── rofi/                   # Scripts Rofi
-│   └── git/                    # Scripts Git
-├── configs/                     # Configuraciones organizadas
-│   ├── dwm/
-│   ├── waybar/
-│   ├── zellij/
-│   ├── rofi/
-│   └── kitty/
-├── workflow/                    # Sistema Eco-Workflow
-│   ├── profiles/                 # Perfiles de workflows
-│   └── zellij/layouts/          # Layouts Zellij
-├── ui/                          # Control Center GUI
-│   ├── s1b_control_center.py  # Python/Tkinter
-│   └── ui_config.yaml           # Configuración GUI
-├── tests/                       # Suite de tests
-├── docs/                        # Documentación
-├── backup/                      # Backups automáticos
-├── logs/                        # Logs del sistema
-├── README.md                    # Este archivo
-├── LICENSE                      # Licencia MIT
-└── CHANGELOG.md                 # Historia de cambios
+│   ├── modules/                  # Installation modules
+│   ├── post_install/             # Post-installation
+│   └── rollback/                # Rollback system
+├── scripts/                     # All organized scripts
+│   ├── common/                  # Common libraries
+│   ├── audio/                   # Audio scripts
+│   ├── battery/                 # Battery scripts
+│   ├── display/                 # Display scripts
+│   ├── dwm/                    # DWM scripts
+│   ├── networking/              # Network scripts
+│   ├── system/                  # System scripts
+│   └── workflow/                # Eco-Workflow scripts
+├── docs/                        # Documentation
+├── tests/                       # Test suite
+└── README.md                    # This file
 ```
 
 ---
 
 ## 🔧 Installation
 
-### Normal Installation
+### Installation Modes
 
-```bash
-cd ~/Desktop/S1Bs1stem
-./install/ORCHESTRA.sh
-```
+<div align="center">
 
-### Interactive Mode
+| Mode | Command | Description |
+|:---|:---|:---|
+| **Normal** | `./install/ORCHESTRA.sh` | Interactive environment selection menu |
+| **Interactive** | `./install/ORCHESTRA.sh --interactive` | Prompt before each script |
+| **Dry-run** | `./install/ORCHESTRA.sh --dry-run` | Preview without executing |
+| **Reset** | `./install/ORCHESTRA.sh --reset` | Reset installation state |
+| **Verbose** | `./install/ORCHESTRA.sh --verbose` | Detailed output |
 
-```bash
-./install/ORCHESTRA.sh --interactive
-```
-
-### Dry-run Mode (Preview)
-
-```bash
-./install/ORCHESTRA.sh --dry-run
-```
-
-### Reset Installation
-
-```bash
-./install/ORCHESTRA.sh --reset
-```
-
-### Individual Module Installation
-
-```bash
-# Install only DWM setup
-./install/modules/010_dwm_setup.sh
-
-# Install only shell setup
-./install/modules/020_shell_setup.sh
-```
+</div>
 
 ---
 
-## 📚 Usage
+## 🎨 Customization
 
-### Orchestrator Commands
+S1Bs1stem is designed to work seamlessly with [dotfiles-s1b](https://github.com/ind4skylivey/dotfiles-s1b). All configurations are sourced from there.
 
-```bash
-# Normal installation
-./install/ORCHESTRA.sh
+### Quick Customization
 
-# Interactive mode (prompt before each script)
-./install/ORCHESTRA.sh --interactive
-
-# Dry-run (preview without executing)
-./install/ORCHESTRA.sh --dry-run
-
-# Reset state
-./install/ORCHESTRA.sh --reset
-
-# Verbose output
-./install/ORCHESTRA.sh --verbose
-
-# Show help
-./install/ORCHESTRA.sh --help
-```
-
-### Common Functions Usage
-
-```bash
-# Source functions in your scripts
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
-
-# Use helper functions
-backup_file ~/.config/dwm
-check_dependencies git zsh tmux
-switch_workflow local
-dwm_restart
-waybar_reload
-```
-
-### Logger Usage
-
-```bash
-# Source logger
-source ~/Desktop/S1Bs1stem/scripts/common/logger.sh
-
-# Log messages
-log_info "Starting process..."
-log_success "Process completed!"
-log_warn "Warning message"
-log_error "Error occurred"
-
-# View logs
-log_recent 20        # Last 20 lines
-log_last_errors 10   # Last 10 errors
-log_tail              # Follow logs in real-time
-```
-
-### Rollback System
-
-```bash
-# Create snapshot
-source ~/Desktop/S1Bs1stem/scripts/common/rollback.sh
-create_snapshot "before_upgrade"
-
-# Restore snapshot
-restore_snapshot "before_upgrade"
-
-# List snapshots
-list_snapshots
-
-# Delete snapshot
-delete_snapshot "old_snapshot"
-
-# Auto snapshot (with timestamp)
-create_auto_snapshot
-```
-
----
-
-## 🧠 Workflows
-
-### Switching Workflows
-
-```bash
-# Using switch script
-~/Desktop/S1Bs1stem/scripts/workflow/switch_workflow.sh local
-
-# Using aliases (after sourcing)
-ws-local      # Local Development
-ws-remote     # Remote Server
-ws-write       # Deep Write
-ws-redteam     # Red Team
-```
-
-### Workflow Menu (Rofi)
-
-```bash
-# Launch workflow menu
-~/Desktop/S1Bs1stem/scripts/workflow/ws-menu.sh
-```
-
-### Workflow Profiles
-
-Los perfiles están en `workflow/profiles/`:
-
-- **local.md:** Desarrollo local con Neovim + Zellij
-- **remote.md:** Servidores remotos con Tmux + SSH
-- **write.md:** Escritura con Doom Emacs + Yazi
-- **redteam.md:** Investigación de seguridad con Zellij + Podman
+| Component | File | How to Customize |
+|:---|:---|:---|
+| **Terminal** | `~/.config/kitty/kitty.conf` | Edit color schemes |
+| **Shell** | `~/.config/fish/config.fish` | Add aliases/functions |
+| **Window Manager** | `~/.config/dwm/config.h` | Modify DWM patches |
+| **Workflows** | `~/workflow/zellij/layouts/` | Tweak layouts |
+| **Theme** | `~/.config/waybar/config` | Adjust bar modules |
 
 ---
 
 ## 🐛 Troubleshooting
-
-### Common Issues
-
-#### Installation Fails
-
-**Problem:** ORCHESTRA.sh fails at script execution
-
-**Solution:**
-```bash
-# Check logs
-cat ~/.s1b_logs/s1b_system.log
-
-# Run individual script manually
-./install/modules/010_dwm_setup.sh
-```
-
-#### Dependencies Missing
-
-**Problem:** Some packages are not installed
-
-**Solution:**
-```bash
-# Install all dependencies manually
-sudo pacman -S --needed <dependencies>
-
-# Re-run orchestrator
-./install/ORCHESTRA.sh
-```
-
-#### DWM Not Starting
-
-**Problem:** DWM fails to start
-
-**Solution:**
-```bash
-# Check DWM config
-~/.config/dwm/config.h
-
-# Test compile
-cd ~/.config/dwm
-sudo make clean install
-
-# Check logs
-~/.xsession-errors
-```
-
-#### Waybar Issues
-
-**Problem:** Waybar not displaying or crashes
-
-**Solution:**
-```bash
-# Check Waybar config
-~/.config/waybar/config
-
-# Test config
-waybar -c ~/.config/waybar/config
-
-# Check logs
-journalctl -u waybar -f
-```
 
 ### Getting Help
 
@@ -393,57 +322,40 @@ s1b-diagnose
 
 ---
 
+## 🗺️ Roadmap
+
+<div align="center">
+
+| Version | Features | Status |
+|:---|:---:|:---:|
+| **v1.0** | Core orchestration system | ✅ Complete |
+| **v1.1** | Control Center GUI | ✅ Complete |
+| **v1.2** | Advanced rollback system | ✅ Complete |
+| **v1.3** | Eco-Workflow profiles | ✅ Complete |
+| **v1.4** | Security scripts integration | ✅ Complete |
+| **v1.5** | Environment selection (Wayland + DWM) | ✅ Complete |
+| **v1.6** | Hardware detection + automation scripts | ✅ Complete |
+| **v2.0** | Web-based control panel | 🚧 In Progress |
+| **v2.1** | Cloud sync for configs | 📝 Planned |
+| **v2.2** | AI-powered workflow suggestions | 📝 Planned |
+
+</div>
+
+---
+
 ## 🤝 Contributing
 
-Contributions are welcome!
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ### Coding Standards
 
-- Use Bash 4.0+ features (bashisms are OK)
-- Source common functions when possible
-- Use logging system (log_info, log_success, etc.)
-- Include pre-flight checks in all scripts
-- Document functions with comments
-- Use descriptive variable names
-
-### Script Template
-
-```bash
-#!/bin/bash
-# ============================================================
-#  SCRIPT NAME - Description
-#  ============================================================
-#  Author: Your Name
-#  License: MIT
-#  Version: 1.0.0
-#  ============================================================
-
-set -euo pipefail
-
-# Source common functions
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/../common/functions.sh"
-source "$SCRIPT_DIR/../common/logger.sh"
-source "$SCRIPT_DIR/../common/colors.sh"
-
-# --- MAIN LOGIC ---
-main() {
-    log_info "Starting script..."
-    
-    # Your code here
-    
-    log_success "Script completed!"
-}
-
-# Run main
-main "$@"
-```
+| Standard | Description |
+|:---|:---|
+| **Bash Version** | Use Bash 4.0+ features |
+| **Common Functions** | Source common functions when possible |
+| **Logging** | Use logging system (log_info, log_success, etc.) |
+| **Pre-flight Checks** | Include pre-flight checks in all scripts |
+| **Documentation** | Document functions with comments |
 
 ---
 
@@ -453,23 +365,36 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🌟 Acknowledgments
+## 🌟 Related Projects
 
-- Inspired by [S1B dotfiles](https://github.com/dusklinux/s1b)
-- Built on [Arch Linux](https://archlinux.org/)
-- Window Manager: [DWM](https://dwm.suckless.org/)
-- Terminal Multiplexer: [Zellij](https://zellij.dev/) / [Tmux](https://github.com/tmux/tmux)
-- Shell: [ZSH](https://www.zsh.org/)
-- Theme: [Catppuccin](https://github.com/catppuccin/catppuccin)
+| Project | Description | Link |
+|:---|:---|:---|
+| **dotfiles-s1b** | Configuration files and themes | [github.com/ind4skylivey/dotfiles-s1b](https://github.com/ind4skylivey/dotfiles-s1b) |
+| **S1bCr4ft** | Declarative system configuration framework (Rust) | [github.com/ind4skylivey/S1bCr4ft](https://github.com/ind4skylivey/S1bCr4ft) |
 
 ---
 
 ## 📞 Support
 
-- **GitHub Issues:** [Report a bug](https://github.com/ind4skylivey/S1Bs1stem/issues)
-- **Discord:** [Join our community](https://discord.gg/your-server)
-- **Documentation:** [Full docs](https://github.com/ind4skylivey/S1Bs1stem/wiki)
+### Quick Help Commands
+
+<div align="center">
+
+| Command | Description |
+|:---|:---:|
+| **`s1b-diagnose`** | Run system diagnostics |
+| **`log_last_errors 20`** | View last 20 errors |
+| **`list_snapshots`** | List all snapshots |
+| **`./install/ORCHESTRA.sh --reset`** | Reset installation state |
+
+</div>
 
 ---
 
-**Made with ❤️ by [S1B](https://github.com/ind4skylivey)**
+<div align="center">
+
+**Created by [ind4skylivey](https://github.com/ind4skylivey)**
+
+⭐ Star us on GitHub if you find S1Bs1stem useful!
+
+</div>

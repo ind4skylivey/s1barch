@@ -9,6 +9,12 @@
 #  Version: 1.0.0
 #  ============================================================
 
+# --- GUARD AGAINST RE-SOURCING ---
+if [ -n "${COLORS_SOURCED:-}" ]; then
+    return 0
+fi
+readonly COLORS_SOURCED=true
+
 # --- TERMINAL COLOR SUPPORT ---
 if [[ -t 1 ]] && command -v tput &>/dev/null; then
     if (( $(tput colors 2>/dev/null || echo 0) >= 8 )); then
@@ -23,57 +29,63 @@ fi
 # --- CATPPUCCIN MAUVE THEME COLORS ---
 if [ "$COLOR_SUPPORT" = true ]; then
     # Backgrounds
-    readonly COLOR_BASE="${COLOR_BASE:-'\033[38;5;24m'}"      # #1e1e2e
-    readonly COLOR_MANTLE="${COLOR_MANTLE:-'\033[38;5;25m'}"   # #181825
-    readonly COLOR_SURFACE="${COLOR_SURFACE:-'\033[38;5;26m'}"   # #313244
+    COLOR_BASE="${COLOR_BASE:-'\033[38;5;24m'}"      # #1e1e2e
+    COLOR_MANTLE="${COLOR_MANTLE:-'\033[38;5;25m'}"   # #181825
+    COLOR_SURFACE="${COLOR_SURFACE:-'\033[38;5;26m'}"   # #313244
     
     # Foregrounds
-    readonly COLOR_TEXT="${COLOR_TEXT:-'\033[38;5;27m'}"         # #cdd6f4
-    readonly COLOR_SUBTEXT="${COLOR_SUBTEXT:-'\033[38;5;28m'}"  # #a6adc8
+    COLOR_TEXT="${COLOR_TEXT:-'\033[38;5;27m'}"         # #cdd6f4
+    COLOR_SUBTEXT="${COLOR_SUBTEXT:-'\033[38;5;28m'}"  # #a6adc8
     
     # Accents (Mauve)
-    readonly COLOR_MAuve="${COLOR_Mauve:-'\033[38;5;35m'}"     # #cba6f7
-    readonly COLOR_RED="${COLOR_RED:-'\033[38;5;167m'}"        # #e38c8f
-    readonly COLOR_PEACH="${COLOR_PEACH:-'\033[38;5;203m'}"    # #fab387
-    readonly COLOR_YELLOW="${COLOR_YELLOW:-'\033[38;5;208m'}"   # #f9e2af
-    readonly COLOR_GREEN="${COLOR_GREEN:-'\033[38;5;150m'}"     # #a6e3a1
-    readonly COLOR_TEAL="${COLOR_TEAL:-'\033[38;5;108m'}"      # #94e2d5
-    readonly COLOR_SKY="${COLOR_SKY:-'\033[38;5;103m'}"        # #89dceb
-    readonly COLOR_LAVENDER="${COLOR_LAVENDER:-'\033[38;5;36m'}" # #b4befe
+    COLOR_MAuve="${COLOR_MAuve:-'\033[38;5;35m'}"     # #cba6f7
+    COLOR_RED="${COLOR_RED:-'\033[38;5;167m'}"        # #e38c8f
+    COLOR_PEACH="${COLOR_PEACH:-'\033[38;5;203m'}"    # #fab387
+    COLOR_YELLOW="${COLOR_YELLOW:-'\033[38;5;208m'}"   # #f9e2af
+    COLOR_GREEN="${COLOR_GREEN:-'\033[38;5;150m'}"     # #a6e3a1
+    COLOR_TEAL="${COLOR_TEAL:-'\033[38;5;108m'}"      # #94e2d5
+    COLOR_SKY="${COLOR_SKY:-'\033[38;5;103m'}"        # #89dceb
+    COLOR_LAVENDER="${COLOR_LAVENDER:-'\033[38;5;36m'}" # #b4befe
     
     # Formatting
-    readonly COLOR_BOLD="${COLOR_BOLD:-'\033[1m'}"
-    readonly COLOR_DIM="${COLOR_DIM:-'\033[2m'}"
-    readonly COLOR_ITALIC="${COLOR_ITALIC:-'\033[3m'}"
-    readonly COLOR_UNDERLINE="${COLOR_UNDERLINE:-'\033[4m'}"
-    readonly COLOR_RESET="${COLOR_RESET:-'\033[0m'}"
+    COLOR_BOLD="${COLOR_BOLD:-'\033[1m'}"
+    COLOR_DIM="${COLOR_DIM:-'\033[2m'}"
+    COLOR_ITALIC="${COLOR_ITALIC:-'\033[3m'}"
+    COLOR_UNDERLINE="${COLOR_UNDERLINE:-'\033[4m'}"
+    COLOR_RESET="${COLOR_RESET:-'\033[0m'}"
     
     # Special formatting
-    readonly COLOR_INFO="${COLOR_INFO:-'$COLOR_BLUE'}"
-    readonly COLOR_SUCCESS="${COLOR_SUCCESS:-'$COLOR_GREEN'}"
-    readonly COLOR_WARNING="${COLOR_WARNING:-'$COLOR_YELLOW'}"
-    readonly COLOR_ERROR="${COLOR_ERROR:-'$COLOR_RED'}"
-    readonly COLOR_DEBUG="${COLOR_DEBUG:-'$COLOR_LAVENDER'}"
+    COLOR_INFO="${COLOR_INFO:-'$COLOR_BLUE'}"
+    COLOR_SUCCESS="${COLOR_SUCCESS:-'$COLOR_GREEN'}"
+    COLOR_WARNING="${COLOR_WARNING:-'$COLOR_YELLOW'}"
+    COLOR_ERROR="${COLOR_ERROR:-'$COLOR_RED'}"
+    COLOR_DEBUG="${COLOR_DEBUG:-'$COLOR_LAVENDER'}"
 else
     # No color support
-    readonly COLOR_BASE=''
-    readonly COLOR_MANTLE=''
-    readonly COLOR_SURFACE=''
-    readonly COLOR_TEXT=''
-    readonly COLOR_SUBTEXT=''
-    readonly COLOR_MAuve=''
-    readonly COLOR_RED=''
-    readonly COLOR_PEACH=''
-    readonly COLOR_YELLOW=''
-    readonly COLOR_GREEN=''
-    readonly COLOR_TEAL=''
-    readonly COLOR_SKY=''
-    readonly COLOR_LAVENDER=''
-    readonly COLOR_BOLD=''
-    readonly COLOR_DIM=''
-    readonly COLOR_ITALIC=''
-    readonly COLOR_UNDERLINE=''
-    readonly COLOR_RESET=''
+    COLOR_BASE=''
+    COLOR_MANTLE=''
+    COLOR_SURFACE=''
+    COLOR_TEXT=''
+    COLOR_SUBTEXT=''
+    COLOR_MAuve=''
+    COLOR_Mauve=''
+    COLOR_RED=''
+    COLOR_PEACH=''
+    COLOR_YELLOW=''
+    COLOR_GREEN=''
+    COLOR_TEAL=''
+    COLOR_SKY=''
+    COLOR_LAVENDER=''
+    COLOR_BOLD=''
+    COLOR_DIM=''
+    COLOR_ITALIC=''
+    COLOR_UNDERLINE=''
+    COLOR_RESET=''
+fi
+
+# Add alias for backward compatibility (COLOR_Mauve vs COLOR_MAuve)
+if [ -z "${COLOR_Mauve:-}" ] && [ -n "${COLOR_MAuve:-}" ]; then
+    COLOR_Mauve="$COLOR_MAuve"
 fi
 
 # --- LOGGING WITH COLORS ---
@@ -162,6 +174,16 @@ box_content() {
 box_footer() {
     echo -e "${COLOR_SURFACE}└$(printf '─%.0s' $(seq 1 40))┘${COLOR_RESET}"
 }
+
+# --- MARK VARIABLES READONLY (only on first load) ---
+if [ -z "${COLORS_READONLY_DONE:-}" ]; then
+    readonly COLOR_BASE COLOR_MANTLE COLOR_SURFACE
+    readonly COLOR_TEXT COLOR_SUBTEXT
+    readonly COLOR_MAuve COLOR_Mauve COLOR_RED COLOR_PEACH COLOR_YELLOW COLOR_GREEN COLOR_TEAL COLOR_SKY COLOR_LAVENDER
+    readonly COLOR_BOLD COLOR_DIM COLOR_ITALIC COLOR_UNDERLINE COLOR_RESET
+    readonly COLOR_INFO COLOR_SUCCESS COLOR_WARNING COLOR_ERROR COLOR_DEBUG
+    readonly COLORS_READONLY_DONE=true
+fi
 
 # --- EXPORT FUNCTIONS ---
 export -f color_log

@@ -34,7 +34,6 @@ ensure_dir_exists "$DWM_CONFIG_DIR"
 
 # Backup existing DWM config
 if [ -d "$DWM_CONFIG_DIR" ]; then
-    local backup
     backup=$(backup_dir "$DWM_CONFIG_DIR")
     log_info "Backed up existing DWM config to: $backup"
 fi
@@ -51,7 +50,7 @@ fi
 # Check DWM dependencies
 log_info "Checking DWM dependencies..."
 
-local dwm_deps=(
+dwm_deps=(
     "libx11"
     "libxft"
     "libxinerama"

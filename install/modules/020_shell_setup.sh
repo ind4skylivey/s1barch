@@ -86,7 +86,7 @@ fi
 # Install useful shell utilities
 log_info "Installing shell utilities..."
 
-local shell_utils=(
+shell_utils=(
     "ripgrep"      # Better grep
     "fd"           # Better find
     "bat"          # Better cat

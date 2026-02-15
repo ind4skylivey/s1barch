@@ -1,87 +1,41 @@
 #!/bin/bash
 # ============================================================
-#  S1Bs1stem - ORCHESTRATOR MASTER SCRIPT
+#  S1Bs1stem - ORCHESTRATOR MASTER SCRIPT (v1.5.0)
 #  ============================================================
 #  Inspired by: S1B ORCHESTRA.sh
-#  Purpose: Coordinated installation and configuration
+#  Purpose: Coordinated installation and configuration with environment selection
 #  Author: S1B System
 #  License: MIT
-#  Version: 1.0.0
+#  Version: 1.5.0
 #  ============================================================
 
 set -euo pipefail
 
 # --- CONSTANTS ---
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly S1B_ROOT="$(dirname "$SCRIPT_DIR")"
-readonly STATE_FILE="$HOME/.s1b_install_state"
-readonly LOG_FILE="$HOME/.s1b_install_$(date +%Y%m%d_%H%M%S).log"
-readonly LOCK_FILE="/tmp/s1b_orchestra.lock"
-readonly BACKUP_DIR="$HOME/.s1b_backup_$(date +%Y%m%d_%H%M%S)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly SCRIPT_DIR
 
 # --- SOURCE COMMON FUNCTIONS ---
 source "$SCRIPT_DIR/../scripts/common/functions.sh"
 source "$SCRIPT_DIR/../scripts/common/logger.sh"
 source "$SCRIPT_DIR/../scripts/common/colors.sh"
 
-# --- INSTALLATION SEQUENCE ---
-# Format: MODE | script.sh [args]
-# MODE: U = User, S = Sudo
-readonly INSTALL_SEQUENCE=(
-    # Phase 1: Pre-flight Checks
-    "U | preflight/000_system_check.sh"
-    "U | preflight/001_dependencies_check.sh"
-    "U | preflight/002_disk_space_check.sh"
-    "U | preflight/003_network_check.sh"
-    
-    # Phase 2: Core Setup
-    "U | modules/010_dwm_setup.sh"
-    "U | modules/020_shell_setup.sh"
-    "U | modules/030_terminal_setup.sh"
-    "U | modules/040_workflow_setup.sh"
-    
-    # Phase 3: UI Components
-    "U | modules/050_waybar_setup.sh"
-    "U | modules/060_rofi_setup.sh"
-    "U | modules/070_zellij_setup.sh"
-    
-    # Phase 4: Security Tools
-    "U | modules/080_security_tools.sh"
-    
-    # Phase 5: Finalization
-    "U | modules/090_final_cleanup.sh"
-    "U | post_install/setup_stow.sh"
-    "U | post_install/setup_permissions.sh"
-    "U | post_install/verify_installation.sh"
-)
-
-# --- SUDO MANAGEMENT ---
-SUDO_PID=""
-
-init_sudo() {
-    log_info "Sudo privileges required. Please authenticate."
-    if ! sudo -v; then
-        log_error "Sudo authentication failed."
-        exit 1
-    fi
-    
-    # Refresh sudo periodically
-    (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null) &
-    SUDO_PID=$!
-    disown "$SUDO_PID"
-}
-
-cleanup_sudo() {
-    if [ -n "$SUDO_PID" ]; then
-        kill "$SUDO_PID" 2>/dev/null || true
-    fi
-}
+# --- ADDITIONAL CONSTANTS ---
+# Note: S1B_ROOT, LOG_DIR, LOG_FILE are already set by common libraries
+readonly STATE_FILE="$HOME/.s1b_install_state"
+INSTALL_LOG_FILE="$HOME/.s1b_install_$(date +%Y%m%d_%H%M%S).log"
+readonly INSTALL_LOG_FILE
+readonly LOCK_FILE="/tmp/s1b_orchestra.lock"
+BACKUP_DIR="$HOME/.s1b_backup_$(date +%Y%m%d_%H%M%S)"
+readonly BACKUP_DIR
+readonly ENV_SELECTION_FILE="$SCRIPT_DIR/.env_selection"
+readonly CUSTOM_SELECTION_FILE="$SCRIPT_DIR/.custom_selection"
 
 # --- HELPERS ---
 trim() {
     local var="$*"
-    var="${var#"${var%%[![:space:]]*"}"
-    var="${var%"${var##*[![:space:]]"}"
+    var="${var#"${var%%[![:space:]]*}"}"
+    var="${var%"${var##*[![:space:]]}"}"
     printf '%s' "$var"
 }
 
@@ -99,12 +53,15 @@ preflight_check() {
     log_info "Performing pre-flight validation..."
     
     local missing=0
-    for entry in "${INSTALL_SEQUENCE[@]}"; do
-        local rest="${entry#*|}"
-        rest=$(trim "$rest")
-        local filename args
-        read -r filename args <<< "$rest"
-        
+    local files_to_check=(
+        "preflight/000_environment_selector.sh"
+        "preflight/001_dependencies_check.sh"
+        "preflight/002_disk_space_check.sh"
+        "preflight/003_network_check.sh"
+        "preflight/003_custom_selector.sh"
+    )
+    
+    for filename in "${files_to_check[@]}"; do
         if [[ ! -f "$SCRIPT_DIR/$filename" ]]; then
             log_error "Missing file: ${filename}"
             ((missing++))
@@ -112,21 +69,42 @@ preflight_check() {
     done
     
     if ((missing > 0)); then
-        log_error "$missing script(s) are missing from $SCRIPT_DIR"
+        log_error "$missing preflight script(s) are missing"
         read -r -p "Continue anyway? [y/N]: " _choice
         if [[ "${_choice,,}" != "y" ]]; then
             log_error "Aborting execution."
             exit 1
         fi
     else
-        log_success "All sequence files verified."
+        log_success "All preflight scripts verified."
+    fi
+}
+
+# --- SUDO MANAGEMENT ---
+SUDO_PID=""
+
+init_sudo() {
+    log_info "Sudo privileges required. Please authenticate."
+    if ! sudo -v; then
+        log_error "Sudo authentication failed."
+        exit 1
+    fi
+    
+    (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null) &
+    SUDO_PID=$!
+    disown "$SUDO_PID"
+}
+
+cleanup_sudo() {
+    if [ -n "$SUDO_PID" ]; then
+        kill "$SUDO_PID" 2>/dev/null || true
     fi
 }
 
 # --- ARGUMENT HANDLING ---
 show_help() {
     cat << EOF
-${COLOR_MAuve}${COLOR_BOLD}S1Bs1stem Orchestrator${COLOR_RESET}
+${COLOR_MAuve}${COLOR_BOLD}S1Bs1stem Orchestrator v1.5.0${COLOR_RESET}
 
 ${COLOR_TEXT}Usage:${COLOR_RESET} $0 [OPTIONS]
 
@@ -138,12 +116,16 @@ ${COLOR_TEXT}Options:${COLOR_RESET}
     ${COLOR_GREEN}--verbose, -v${COLOR_RESET}    Enable verbose output
 
 ${COLOR_TEXT}Description:${COLOR_RESET}
-    This script orchestrates the installation and configuration
-    of S1Bs1stem system. It tracks completed scripts and
-    can resume from where it left off if interrupted.
+    This script orchestrates installation and configuration
+    of S1Bs1stem system. You can choose to install:
+    
+    - Full Installation (Wayland + DWM/X11)
+    - Wayland Only (Waybar + Wofi)
+    - DWM/X11 Only (DWM + Picom + Rofi)
+    - Custom Installation (select specific modules)
 
 ${COLOR_TEXT}Examples:${COLOR_RESET}
-    $0                  # Normal run
+    $0                  # Normal run with environment selection
     $0 --dry-run       # Preview what would be executed
     $0 --reset         # Reset progress and start over
     $0 --interactive    # Run with prompts before each script
@@ -170,15 +152,17 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --reset)
-            rm -f "$STATE_FILE"
+            rm -f "$STATE_FILE" "$ENV_SELECTION_FILE" "$CUSTOM_SELECTION_FILE"
             log_info "State file reset. Starting fresh."
             shift
             ;;
         --interactive|-i)
+            # shellcheck disable=SC2034
             INTERACTIVE_MODE=true
             shift
             ;;
         --verbose|-v)
+            # shellcheck disable=SC2034
             VERBOSE=true
             set -x
             shift
@@ -197,34 +181,28 @@ if [ "$DRY_RUN" = true ]; then
     echo ""
     log_info "Script directory: $SCRIPT_DIR"
     log_info "State file: $STATE_FILE"
+    log_info "Selection file: $ENV_SELECTION_FILE"
     echo ""
-    log_info "Execution plan:"
+    log_info "Available modules:"
     echo ""
     
-    local i=0
-    for entry in "${INSTALL_SEQUENCE[@]}"; do
-        ((++i))
-        local mode="${entry%%|*}"
-        local rest="${entry#*|}"
-        mode=$(trim "$mode")
-        rest=$(trim "$rest")
-        
-        local filename args
-        read -r filename args <<< "$rest"
-        
-        local mode_label="USER"
-        [[ "$mode" == "S" ]] && mode_label="SUDO"
-        
-        local status="PENDING"
-        if [[ -f "$STATE_FILE" ]] && grep -Fxq "$filename" "$STATE_FILE" 2>/dev/null; then
-            status="${COLOR_GREEN}DONE${COLOR_RESET}"
-        fi
-        
-        printf "  %3d. [%s] %-45s %s\n" "$i" "$mode_label" "${filename}${args:+ $args}" "$status"
-    done
-    
+    echo "  Environment-Specific:"
+    echo "    - DWM/X11: 050_dwm_setup.sh, 051_picom_setup.sh, 052_rofi_setup.sh"
+    echo "    - Wayland:  060_waybar_setup.sh, 061_wofi_setup.sh"
     echo ""
+    echo "  Shared Modules:"
+    echo "    - 070_qt_setup.sh (Qt Theme Engine)"
+    echo "    - 071_warp_setup.sh (Warp Terminal)"
+    echo "    - 072_browser_setup.sh (Zen Browser)"
+    echo "    - 073_editor_setup.sh (Neovim, Doom Emacs, etc.)"
+    echo "    - 074_filemanager_setup.sh (Yazi, PCManFM-Qt)"
+    echo "    - 075_multiplexer_setup.sh (Tmux, Zellij)"
+    echo "    - 076_monitor_setup.sh (BTop, Cava, Fastfetch, Materiatrack)"
+    echo "    - 080_workflow_setup.sh (Eco-Workflow)"
+    echo ""
+    
     log_info "No changes will be made."
+    log_info "Run without --dry-run to execute installation."
     exit 0
 fi
 
@@ -239,198 +217,152 @@ main() {
     
     # Acquire lock
     acquire_lock "$LOCK_FILE"
+    # shellcheck disable=SC2064
     trap "release_lock '$LOCK_FILE'" EXIT
     
     # Setup logging
-    log_info "Starting S1Bs1stem Orchestrator"
-    log_info "Log file: $LOG_FILE"
+    log_info "🚀 S1Bs1stem Orchestrator v1.5.0 Starting..."
+    log_info "Install log: $INSTALL_LOG_FILE"
+    log_info "System log: $LOG_FILE"
     
     # Pre-flight check
     preflight_check
     
-    # Check for sudo requirement
-    local needs_sudo=0
-    for entry in "${INSTALL_SEQUENCE[@]}"; do
-        if [[ "$entry" == S* ]]; then needs_sudo=1; break; fi
-    done
+    # --- STEP 1: Environment Selection ---
+    log_info "Step 1/5: Environment Selection"
+    source "$SCRIPT_DIR/preflight/000_environment_selector.sh"
     
-    if [[ $needs_sudo -eq 1 ]]; then
-        init_sudo
-        trap "cleanup_sudo; release_lock '$LOCK_FILE'" EXIT
-    fi
-    
-    # Session recovery prompt
-    if [[ -s "$STATE_FILE" ]]; then
-        echo ""
-        log_warn ">>> PREVIOUS SESSION DETECTED <<<"
-        read -r -p "Do you want to [C]ontinue where you left off or [S]tart over? [C/s]: " _session_choice
-        if [[ "${_session_choice,,}" == "s" || "${_session_choice,,}" == "start" ]]; then
-            rm -f "$STATE_FILE"
-            touch "$STATE_FILE"
-            log_info "State file reset. Starting fresh."
-        else
-            log_info "Continuing from previous session."
-        fi
-    fi
-    
-    # Execution mode selection
-    if [[ $INTERACTIVE_MODE -eq 1 ]]; then
-        echo ""
-        log_info ">>> INTERACTIVE MODE <<<"
-        log_info "You will be asked before each script."
+    # Read selection
+    if [ -f "$ENV_SELECTION_FILE" ]; then
+        # shellcheck source=/dev/null
+        source "$ENV_SELECTION_FILE"
+        log_info "Environment: $INSTALL_ENVIRONMENT ($INSTALL_MODE)"
     else
-        log_info ">>> AUTONOMOUS MODE <<<"
-        log_info "Running all scripts without confirmation."
+        log_error "Environment selection failed!"
+        exit 1
     fi
     
-    # Start timer
-    local start_ts=$SECONDS
-    touch "$STATE_FILE"
+    # --- STEP 2: Base Modules (ALWAYS EXECUTE) ---
+    log_info "Step 2/5: Installing Base Modules..."
+    source "$SCRIPT_DIR/preflight/001_dependencies_check.sh"
+    source "$SCRIPT_DIR/preflight/002_disk_space_check.sh"
+    source "$SCRIPT_DIR/preflight/003_network_check.sh"
     
-    # Execute scripts
-    local total_scripts=${#INSTALL_SEQUENCE[@]}
-    local current_index=0
-    local SKIPPED_OR_FAILED=()
+    source "$SCRIPT_DIR/modules/020_shell_setup.sh"
+    source "$SCRIPT_DIR/modules/030_terminal_setup.sh"
     
-    for entry in "${INSTALL_SEQUENCE[@]}"; do
-        ((++current_index))
+    # --- STEP 3: Environment-Specific Modules ---
+    log_info "Step 3/5: Installing Environment-Specific Modules..."
+    
+    if [ "$INSTALL_MODE" = "custom" ]; then
+        # Custom mode: load individual selections
+        log_info "Processing custom module selection..."
+        source "$SCRIPT_DIR/preflight/003_custom_selector.sh"
         
-        local mode="${entry%%|*}"
-        local rest="${entry#*|}"
-        mode=$(trim "$mode")
-        rest=$(trim "$rest")
-        
-        local filename args
-        read -r filename args <<< "$rest"
-        
-        # Check if script exists
-        if [[ ! -f "$SCRIPT_DIR/$filename" ]]; then
-            log_error "Script not found: $filename"
-            log_error "Looked in: $SCRIPT_DIR"
-            read -r -p "Do you want to [S]kip to next, [R]etry check, or [Q]uit? (s/r/q): " _choice
-            case "${_choice,,}" in
-                s|skip)
-                    SKIPPED_OR_FAILED+=("$filename")
-                    continue
-                    ;;
-                r|retry)
-                    log_info "Retrying check for $filename..."
-                    sleep 1
-                    ;;
-                *)
-                    log_info "Stopping execution."
-                    exit 1
-                    ;;
-            esac
-        fi
-        
-        # Check if already completed
-        if grep -Fxq "$filename" "$STATE_FILE" 2>/dev/null; then
-            log_warn "[${current_index}/${total_scripts}] Skipping $filename (Already Completed)"
-            continue
-        fi
-        
-        # Interactive mode prompt
-        if [[ $INTERACTIVE_MODE -eq 1 ]]; then
-            local desc
-            desc=$(get_script_description "$filename")
-            
-            echo ""
-            log_info ">>> NEXT SCRIPT [${current_index}/${total_scripts}]: $filename ${args:+ $args} ($mode)"
-            echo "    ${COLOR_SUBTEXT}Description: $desc${COLOR_RESET}"
-            
-            read -r -p "Do you want to [P]roceed, [S]kip, or [Q]uit? (p/s/q): " _user_confirm
-            case "${_user_confirm,,}" in
-                s|skip)
-                    log_warn "Skipping $filename (User Selection)"
-                    SKIPPED_OR_FAILED+=("$filename")
-                    continue
-                    ;;
-                q|quit)
-                    log_info "User requested exit."
-                    exit 0
-                    ;;
-                *)
-                    # Proceed
-                    ;;
-            esac
-        fi
-        
-        # Execute with retry loop
-        while true; do
-            log_run "[${current_index}/${total_scripts}] Executing: $filename $args ($mode)"
-            
-            local result=0
-            if [[ "$mode" == "S" ]]; then
-                sudo bash "$SCRIPT_DIR/$filename" $args || result=$?
-            elif [[ "$mode" == "U" ]]; then
-                bash "$SCRIPT_DIR/$filename" $args || result=$?
-            else
-                log_error "Invalid mode '$mode' in config. Use 'S' or 'U'."
-                exit 1
-            fi
-            
-            if [[ $result -eq 0 ]]; then
-                echo "$filename" >> "$STATE_FILE"
-                log_success "Finished $filename"
-                sleep 1
-                break
-            else
-                log_error "Failed $filename (Exit Code: $result)."
-                
-                echo ""
-                log_warn "Action Required: Script execution failed."
-                read -r -p "Do you want to [S]kip to next, [R]etry, or [Q]uit? (s/r/q): " _fail_choice
-                case "${_fail_choice,,}" in
-                    s|skip)
-                        log_warn "Skipping $filename (User Selection). NOT marking as complete."
-                        SKIPPED_OR_FAILED+=("$filename")
-                        break
+        # Read and execute selected modules
+        if [ -f "$CUSTOM_SELECTION_FILE" ]; then
+            log_info "Executing selected modules..."
+            while IFS= read -r module; do
+                case "$module" in
+                    shell)
+                        source "$SCRIPT_DIR/modules/020_shell_setup.sh"
                         ;;
-                    r|retry)
-                        log_info "Retrying $filename..."
-                        sleep 1
-                        continue
+                    terminal)
+                        source "$SCRIPT_DIR/modules/030_terminal_setup.sh"
                         ;;
-                    *)
-                        log_info "Stopping execution as requested."
-                        exit 1
+                    dwm)
+                        source "$SCRIPT_DIR/modules/010_dwm_setup.sh"
+                        ;;
+                    picom)
+                        log_info "Picom setup included in DWM module"
+                        ;;
+                    rofi)
+                        source "$SCRIPT_DIR/../scripts/rofi/setup.sh"
+                        ;;
+                    waybar)
+                        source "$SCRIPT_DIR/modules/040_workflow_setup.sh"
+                        ;;
+                    wofi)
+                        source "$SCRIPT_DIR/modules/061_wofi_setup.sh"
+                        ;;
+                    qt)
+                        source "$SCRIPT_DIR/modules/070_qt_setup.sh"
+                        ;;
+                    warp)
+                        source "$SCRIPT_DIR/modules/071_warp_setup.sh"
+                        ;;
+                    browser)
+                        source "$SCRIPT_DIR/../scripts/browser/setup.sh"
+                        ;;
+                    editor)
+                        source "$SCRIPT_DIR/../scripts/editor/setup.sh"
+                        ;;
+                    filemanager)
+                        source "$SCRIPT_DIR/../scripts/filemanager/setup.sh"
+                        ;;
+                    multiplexer)
+                        source "$SCRIPT_DIR/../scripts/multiplexer/setup.sh"
+                        ;;
+                    monitor)
+                        source "$SCRIPT_DIR/../scripts/monitor/setup.sh"
+                        ;;
+                    workflow)
+                        source "$SCRIPT_DIR/modules/040_workflow_setup.sh"
                         ;;
                 esac
-            fi
-        done
-    done
+            done < "$CUSTOM_SELECTION_FILE"
+        fi
+    else
+        # Full or environment-specific mode
+        if [ "$INSTALL_ENVIRONMENT" = "both" ] || [ "$INSTALL_ENVIRONMENT" = "dwm" ]; then
+            log_info "Installing DWM/X11 environment..."
+            source "$SCRIPT_DIR/modules/010_dwm_setup.sh"
+            source "$SCRIPT_DIR/../scripts/dwm/setup.sh"
+            source "$SCRIPT_DIR/../scripts/rofi/setup.sh"
+        fi
+        
+        if [ "$INSTALL_ENVIRONMENT" = "both" ] || [ "$INSTALL_ENVIRONMENT" = "wayland" ]; then
+            log_info "Installing Wayland environment..."
+            source "$SCRIPT_DIR/modules/040_workflow_setup.sh"
+            source "$SCRIPT_DIR/modules/061_wofi_setup.sh"
+        fi
+    fi
     
-    # Calculate elapsed time
-    local end_ts=$SECONDS
-    local duration=$((end_ts - start_ts))
-    local minutes=$((duration / 60))
-    local seconds=$((duration % 60))
+    # --- STEP 4: Shared Modules (ALWAYS EXECUTE in non-custom mode) ---
+    if [ "$INSTALL_MODE" != "custom" ]; then
+        log_info "Step 4/5: Installing Shared Modules..."
+        source "$SCRIPT_DIR/modules/070_qt_setup.sh"
+        source "$SCRIPT_DIR/modules/071_warp_setup.sh"
+        source "$SCRIPT_DIR/../scripts/browser/setup.sh"
+        source "$SCRIPT_DIR/../scripts/editor/setup.sh"
+        source "$SCRIPT_DIR/../scripts/filemanager/setup.sh"
+        source "$SCRIPT_DIR/../scripts/multiplexer/setup.sh"
+        source "$SCRIPT_DIR/../scripts/monitor/setup.sh"
+        source "$SCRIPT_DIR/modules/040_workflow_setup.sh"
+    fi
+    
+    # --- STEP 5: Post-Install ---
+    log_info "Step 5/5: Post-Install Configuration..."
+    if [ -f "$SCRIPT_DIR/modules/090_final_cleanup.sh" ]; then
+        source "$SCRIPT_DIR/modules/090_final_cleanup.sh"
+    fi
+    if [ -f "$SCRIPT_DIR/post_install/setup_stow.sh" ]; then
+        source "$SCRIPT_DIR/post_install/setup_stow.sh"
+    fi
     
     # Summary
     echo ""
-    box_title "ORCHESTRATION COMPLETED"
+    box_title "🎉 ORCHESTRATION COMPLETED"
     echo ""
-    log_info "Execution Time: ${minutes}m ${seconds}s"
-    log_info "Log file: $LOG_FILE"
-    echo ""
-    
-    if [[ ${#SKIPPED_OR_FAILED[@]} -gt 0 ]]; then
-        log_warn "Some scripts were skipped or failed:"
-        for f in "${SKIPPED_OR_FAILED[@]}"; do
-            echo "  - $f"
-        done
-        echo ""
-    fi
-    
-    log_success "Installation completed successfully!"
+    log_success "Environment: $INSTALL_ENVIRONMENT ($INSTALL_MODE)"
+    log_info "Install log: $INSTALL_LOG_FILE"
+    log_info "System log: $LOG_FILE"
+    log_info "Backup location: $BACKUP_DIR"
     echo ""
     log_info "Next steps:"
     echo "  1. Logout and login to apply shell changes"
-    echo "  2. Restart DWM (if running)"
-    echo "  3. Run 's1b-doctor' to verify system health"
-    echo ""
-    log_info "Backup location: $BACKUP_DIR"
+    echo "  2. Restart your session (DWM or Wayland)"
+    echo "  3. Run 'ws-menu' to launch your first workflow"
     echo ""
 }
 

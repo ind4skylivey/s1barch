@@ -1,0 +1,48 @@
+name: Security Scanning
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Run Gitleaks
+      uses: zricethezav/gitleaks-action@v2
+      with:
+        config-path: .gitleaks.toml
+        
+    - name: Check .gitignore security patterns
+      run: |
+        echo "Checking .gitignore security patterns..."
+        patterns=(".env" "*.key" "*.pem" "credentials.json" "secrets.json" "*secret*" "**/github_token*")
+        missing=0
+        for pattern in "${patterns[@]}"; do
+          if ! grep -q "$pattern" .gitignore; then
+            echo "⚠️  Missing pattern in .gitignore: $pattern"
+            missing=1
+          fi
+        done
+        if [ $missing -eq 1 ]; then
+          exit 1
+        fi
+        echo "✅ All security patterns present in .gitignore"
+        
+    - name: Scan for hardcoded secrets
+      run: |
+        echo "Scanning for potential secrets..."
+        if grep -r -E "(API_KEY|api_key|TOKEN|token|PASSWORD|password|SECRET|secret)\s*=\s*[\"'][^\"']+[\"']" --include="*.sh" --include="*.bash" --include="*.zsh" . 2>/dev/null | grep -v "^#" | grep -v "your-"; then
+          echo "❌ Potential hardcoded secrets found!"
+          exit 1
+        fi
+        echo "✅ No hardcoded secrets detected"

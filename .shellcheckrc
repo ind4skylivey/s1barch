@@ -1,0 +1,25 @@
+# Shellcheck configuration for S1barch
+# Strict mode for production-quality scripts
+
+# Shell dialect
+shell=bash
+
+# Minimum severity to report
+severity=warning
+
+# Disable specific checks if needed (uncomment if required)
+# SC1090: Can't follow non-constant source
+# SC1091: Not following sourced file
+# disable=SC1090,SC1091
+
+# SC2154: Variables from colors.sh are optional (may be empty in CI/non-TTY)
+# These variables are set by colors.sh but can be empty when COLOR_SUPPORT=false
+disable=SC2154
+
+# Enable optional checks
+enable=add-default-case
+enable=avoid-nullary-conditions
+enable=check-extra-masked-returns
+enable=check-set-e-suppressed
+enable=check-unassigned-uppercase
+enable=deprecate-which

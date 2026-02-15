@@ -35,6 +35,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## Version History
 
+### 1.5.0 - 2026-01-25
+- Environment selection system (Wayland + DWM/X11)
+- Custom module selector with interactive checkmarks
+- Qt configs orchestration (Kvantum + qt5ct + 56 Catppuccin colors)
+- Warp Terminal configs + 12 cyberpunk themes
+- Wayland configs (Wofi launcher)
+- Interactive installation mode
+- Qt environment variables auto-configuration (.xprofile, .bashrc, .zshrc)
+- Warp aliases auto-sourcing in .zshrc (40+ commands)
+
 ### 1.0.0 - 2025-01-25
 - Initial release of S1Bs1stem
 - Foundation layer complete

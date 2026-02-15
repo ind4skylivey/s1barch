@@ -28,7 +28,6 @@ fi
 log_success "Internet connection OK"
 
 # Get local IP
-local local_ip
 local_ip=$(get_local_ip)
 log_info "Local IP: $local_ip"
 
@@ -44,16 +43,15 @@ fi
 # Check download speed (simple test)
 log_info "Testing download speed..."
 if command -v curl &>/dev/null; then
-    local download_time
     download_time=$(time curl -o /dev/null -s -w '%{time_total}' http://speedtest.tele2.net/10mb.zip 2>&1 | grep real | awk '{print $2}')
-    
+
     if [ -n "$download_time" ]; then
         log_info "Download test completed in: ${download_time}s"
     fi
 fi
 
 # Check for common network tools
-local network_tools=(
+network_tools=(
     "ping"
     "curl"
     "wget"

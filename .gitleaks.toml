@@ -1,0 +1,20 @@
+title = "S1barch Security Configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+paths = [
+  '''tests/''',
+  '''.github/''',
+  '''docs/''',
+]
+
+# Allow specific test patterns that might look like secrets
+regexes = [
+  '''your-api-key-here''',
+  '''your-token-here''',
+  '''example-key''',
+  '''sk-xxxx-xxxx-xxxx-xxxx''',
+  '''github_pat_xxxxxxxx''',
+]

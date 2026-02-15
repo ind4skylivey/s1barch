@@ -15,7 +15,7 @@ source "$SCRIPT_DIR/../../scripts/common/colors.sh"
 log_info "Checking dependencies..."
 
 # Core dependencies
-local core_deps=(
+core_deps=(
     "bash"
     "git"
     "grep"
@@ -29,7 +29,7 @@ local core_deps=(
     "gcc"
 )
 
-local missing_core=()
+missing_core=()
 for cmd in "${core_deps[@]}"; do
     if ! command -v "$cmd" &>/dev/null; then
         missing_core+=("$cmd")
@@ -45,14 +45,14 @@ fi
 log_success "Core dependencies OK"
 
 # Optional dependencies
-local optional_deps=(
+optional_deps=(
     "pacman"         # Package manager
     "nvidia-smi"      # NVIDIA GPU
     "xrandr"          # Display management
     "systemctl"       # Systemd
 )
 
-local missing_optional=()
+missing_optional=()
 for cmd in "${optional_deps[@]}"; do
     if ! command -v "$cmd" &>/dev/null; then
         missing_optional+=("$cmd")

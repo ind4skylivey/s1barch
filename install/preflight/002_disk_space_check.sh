@@ -15,7 +15,6 @@ source "$SCRIPT_DIR/../../scripts/common/colors.sh"
 log_info "Checking disk space..."
 
 # Check available space in home directory
-local available_gb total_gb used_gb
 available_gb=$(df -BG "$HOME" | awk 'NR==2 {print $4}' | tr -d 'G')
 total_gb=$(df -BG "$HOME" | awk 'NR==2 {print $2}' | tr -d 'G')
 used_gb=$(df -BG "$HOME" | awk 'NR==2 {print $3}' | tr -d 'G')
@@ -27,8 +26,8 @@ echo "  Available: ${available_gb}GB"
 echo ""
 
 # Minimum space requirements
-local min_required_gb=5
-local recommended_gb=10
+min_required_gb=5
+recommended_gb=10
 
 if [ "$available_gb" -lt "$min_required_gb" ]; then
     log_error "Insufficient disk space!"
@@ -45,16 +44,21 @@ fi
 
 # Check inode usage if available
 if command -v df &>/dev/null && df -i "$HOME" &>/dev/null; then
-    local inodes_available inodes_total inodes_used_percent
     inodes_available=$(df -i "$HOME" | awk 'NR==2 {print $4}')
     inodes_total=$(df -i "$HOME" | awk 'NR==2 {print $2}')
-    inodes_used_percent=$(echo "scale=0; ($inodes_total - $inodes_available) * 100 / $inodes_total" | bc)
-    
-    log_info "Inode usage: ${inodes_used_percent}%"
-    
-    if [ "${inodes_used_percent%.*}" -gt 90 ]; then
-        log_warn "High inode usage detected (>90%)"
-        log_warn "This may cause issues with small files"
+
+    # Only calculate if inodes_total > 0
+    if [ "$inodes_total" -gt 0 ] 2>/dev/null; then
+        inodes_used_percent=$(echo "scale=0; ($inodes_total - $inodes_available) * 100 / $inodes_total" | bc 2>/dev/null || echo "0")
+
+        log_info "Inode usage: ${inodes_used_percent}%"
+
+        if [ "${inodes_used_percent%.*}" -gt 90 ] 2>/dev/null; then
+            log_warn "High inode usage detected (>90%)"
+            log_warn "This may cause issues with small files"
+        fi
+    else
+        log_debug "Inode count not available for this filesystem"
     fi
 fi
 

@@ -1,0 +1,71 @@
+# S1Bs1stem Control Center Configuration
+# Version: 1.0.0
+
+# Theme Settings
+theme: catppuccin_mauve
+
+# Auto-refresh Settings
+auto_refresh: true
+refresh_interval: 5  # seconds
+
+# Available Tabs
+tabs:
+  - System
+  - Workflows
+  - Display
+  - Audio
+  - Network
+
+# System Paths
+paths:
+  s1b_root: ~/Desktop/S1Bs1stem
+  dotfiles_s1b: ~/Desktop/dotfiles-s1b
+  wallpapers: ~/Pictures/wallpapers
+  logs: ~/.s1b_logs
+  snapshots: ~/.s1b_snapshots
+
+# Workflow Shortcuts
+workflows:
+  local:
+    name: Local Development
+    description: Optimized for local coding
+    script: ws-local.sh
+    icon: 💻
+  
+  remote:
+    name: Remote Server
+    description: SSH and remote management
+    script: ws-remote.sh
+    icon: 🌐
+  
+  write:
+    name: Deep Write
+    description: Focus mode for writing
+    script: ws-write.sh
+    icon: ✍️
+  
+  redteam:
+    name: Red Team
+    description: Security testing environment
+    script: ws-redteam.sh
+    icon: 🎯
+
+# Default Settings
+defaults:
+  brightness: 50
+  volume: 50
+  wallpaper_mode: cycle
+
+# Notifications
+notifications:
+  enabled: true
+  show_success: true
+  show_errors: true
+  timeout: 3  # seconds
+
+# Advanced Settings
+advanced:
+  debug_mode: false
+  log_commands: true
+  auto_backup: true
+  backup_before_changes: true

@@ -193,6 +193,7 @@ WORKFACES=(
 )
 
 CHOSEN=$(printf '%s\n' "${WORKFACES[@]}" | rofi -dmenu -p "Select Workflow:")
+readonly CHOSEN
 
 if [ -n "$CHOSEN" ]; then
     WORKFLOW_NAME=$(echo "$CHOSEN" | cut -d: -f2)

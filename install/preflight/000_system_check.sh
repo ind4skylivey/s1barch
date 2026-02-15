@@ -30,7 +30,6 @@ fi
 log_success "Arch Linux detected"
 
 # Check kernel version
-local kernel_version
 kernel_version=$(uname -r)
 log_info "Kernel version: $kernel_version"
 
@@ -49,9 +48,9 @@ else
 fi
 
 # Check display server
-if [ -n "$WAYLAND_DISPLAY" ]; then
+if [ -n "${WAYLAND_DISPLAY:-}" ]; then
     log_info "Display server: Wayland ($WAYLAND_DISPLAY)"
-elif [ -n "$DISPLAY" ]; then
+elif [ -n "${DISPLAY:-}" ]; then
     log_info "Display server: X11 ($DISPLAY)"
 else
     log_warn "No display server detected (headless system?)"
