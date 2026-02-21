@@ -69,13 +69,8 @@ jobs:
         
         # Create stub utility commands
         for cmd in s1b-stow s1b-snapshot s1b-restore s1b-list s1b-delete; do
-            cat > "$HOME/.local/bin/$cmd" << 'EOF'
-#!/bin/bash
-# Stub implementation for testing
-echo "$0: test stub"
-exit 0
-EOF
-            chmod +x "$HOME/.local/bin/$cmd"
+          printf '#!/bin/bash\n# Stub implementation for testing\necho "$0: test stub"\nexit 0\n' > "$HOME/.local/bin/$cmd"
+          chmod +x "$HOME/.local/bin/$cmd"
         done
         
         # Add to PATH
