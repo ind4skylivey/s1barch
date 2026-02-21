@@ -1,4 +1,5 @@
 name: Integration Tests
+# Workflow for validating integration tests in CI/CD pipeline
 
 on:
   push:
