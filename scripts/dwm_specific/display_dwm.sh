@@ -122,7 +122,7 @@ main() {
     local param="$2"
     
     case "$action" in
-        wallpaper|wallpaper|wp)
+        wallpaper|wp)
             if [ -z "$param" ]; then
                 cycle_wallpaper
             else

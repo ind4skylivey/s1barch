@@ -25,7 +25,9 @@ LID_STATE_FILE="$HOME/.s1b_lid_state"
 readonly LID_STATE_OPEN="open"
 readonly LID_STATE_CLOSED="closed"
 readonly ACTION_SUSPEND="suspend"
+# shellcheck disable=SC2034
 readonly ACTION_LOCK="lock"
+# shellcheck disable=SC2034
 readonly ACTION_NONE="nothing"
 
 # Configure lid close action
@@ -57,6 +59,7 @@ get_lid_action() {
 # Handle lid close event
 handle_lid_close() {
     local action="$1"
+    # shellcheck disable=SC2034
     local reason="$2"
     
     log_info "Lid closed: Action=$action"

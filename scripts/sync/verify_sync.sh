@@ -70,6 +70,7 @@ verify_workflows_sync() {
 
 # Generate sync report
 generate_report() {
+    # shellcheck disable=SC2155
     local report_file="$HOME/.s1b_sync_report_$(date +%Y%m%d_%H%M%S).txt"
     
     cat > "$report_file" << EOF

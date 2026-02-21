@@ -76,9 +76,6 @@ Exit"
         "Exit")
             return 0
             ;;
-        "Current: $current"|"Exit")
-            return 0
-            ;;
         *)
             local selected_mic
             selected_mic=$(echo "$choice" | awk '{print $2}')

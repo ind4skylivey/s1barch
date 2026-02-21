@@ -81,9 +81,6 @@ Exit"
         "Exit")
             return 0
             ;;
-        "Current: $current"|"Exit")
-            return 0
-            ;;
         *)
             local selected_sink
             selected_sink=$(echo "$choice" | awk '{print $2}')

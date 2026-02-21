@@ -35,6 +35,7 @@ get_sync_strategy() {
 
 # Backup before sync
 backup_before_sync() {
+    # shellcheck disable=SC2155
     local backup_name="pre_sync_$(date +%Y%m%d_%H%M%S)"
     local backup_path="$BACKUP_DIR/$backup_name"
     
@@ -120,6 +121,7 @@ sync_kitty() {
     
     # Backup existing
     local backup
+    # shellcheck disable=SC2034
     backup=$(backup_file "$kitty_target/kitty.conf" 2>/dev/null || true)
     
     # Copy from dotfiles-s1b
@@ -157,6 +159,7 @@ sync_all() {
     
     local backup_dir
     if [ "$strategy" != "none" ]; then
+        # shellcheck disable=SC2034
         backup_dir=$(backup_before_sync)
     fi
     
@@ -193,6 +196,7 @@ sync_all() {
     
     # Update last sync timestamp
     local current_env
+    # shellcheck disable=SC2034
     current_env=$(source "$SCRIPT_DIR/../detection/get_active_env.sh" && get_env)
     
     if [ -f "$HOME/Desktop/S1Bs1stem/config/current_env.yaml" ]; then

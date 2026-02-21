@@ -46,6 +46,7 @@ DEFAULT_RULES["inkscape"]="floating"
 DEFAULT_RULES["vlc"]="floating"
 
 # Load user rules
+# shellcheck disable=SC2120
 load_rules() {
     local rules_file="${1:-$RULES_FILE}"
 

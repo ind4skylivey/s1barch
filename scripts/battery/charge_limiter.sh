@@ -14,6 +14,7 @@ source "$SCRIPT_DIR/../common/colors.sh"
 
 # Configuration
 LIMIT_FILE="$HOME/.s1b_charge_limiter"
+# shellcheck disable=SC2034
 CHARGE_STOP_THRESHOLD="1"  # Stop charging at 1%
 
 # Battery percentage limits
@@ -148,11 +149,11 @@ while [[ $# -gt 0 ]]; do
             echo ""
             echo "Options:"
             echo "  --show, -s            Show charge limit and current status"
-            "  --set <limit>            Set charge limit (5, 20, 40, 60, 80, 100)"
-            "  --get                  Get current charge limit"
-            "  --check                 Check if charging needs to be stopped"
-            "  --reset               Remove limit (reset to 100%)"
-            "  --help, -h              Show this help"
+            echo "  --set <limit>            Set charge limit (5, 20, 40, 60, 80, 100)"
+            echo "  --get                  Get current charge limit"
+            echo "  --check                 Check if charging needs to be stopped"
+            echo "  --reset               Remove limit (reset to 100%)"
+            echo "  --help, -h              Show this help"
             exit 0
             ;;
     esac

@@ -92,6 +92,7 @@ decrease_brightness() {
 
 # Show brightness menu (for Rofi/dmenu)
 show_menu() {
+    # shellcheck disable=SC2155
     local options="Current: $(get_brightness)%
 Increase (+10%)
 Decrease (-10%)

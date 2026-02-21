@@ -15,8 +15,7 @@ ENV_FILE="$HOME/Desktop/S1Bs1stem/config/current_env.yaml"
 
 is_waybar() {
     if [ ! -f "$ENV_FILE" ]; then
-        local env
-        env=$(source "$SCRIPT_DIR/../detection/detect_env.sh" && main desktop)
+        source "$SCRIPT_DIR/../detection/detect_env.sh" && main desktop >/dev/null 2>&1 || true
         return 0
     fi
     
