@@ -13,9 +13,9 @@
  [![DWM](https://img.shields.io/badge/DWM-Patched-blueviolet?style=for-the-badge)](https://dwm.suckless.org/)
  [![Zellij](https://img.shields.io/badge/Zellij-Workflow-orange?style=for-the-badge&logo=zellij)](https://zellij.dev)
  <br/>
- [![Shellcheck](https://github.com/ind4skylivey/s1barch/actions/workflows/shellcheck.yml/badge.svg?branch=main)](https://github.com/ind4skylivey/s1barch/actions/workflows/shellcheck.yml)
- [![Security](https://github.com/ind4skylivey/s1barch/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/ind4skylivey/s1barch/actions/workflows/security.yml)
- [![Integration](https://github.com/ind4skylivey/s1barch/actions/workflows/integration.yml/badge.svg?branch=main)](https://github.com/ind4skylivey/s1barch/actions/workflows/integration.yml)
+ [![Shellcheck](https://github.com/ind4skylivey/s1barch/actions/workflows/shellcheck.yml/badge.svg?branch=main&v=1)](https://github.com/ind4skylivey/s1barch/actions/workflows/shellcheck.yml)
+ [![Security](https://github.com/ind4skylivey/s1barch/actions/workflows/security.yml/badge.svg?branch=main&v=1)](https://github.com/ind4skylivey/s1barch/actions/workflows/security.yml)
+ [![Integration](https://github.com/ind4skylivey/s1barch/actions/workflows/integration.yml/badge.svg?branch=main&v=1)](https://github.com/ind4skylivey/s1barch/actions/workflows/integration.yml)
 
 [🚀 Quick Install](#-quick-install) • [📖 Documentation](docs/) • [🐛 Report Bug](https://github.com/ind4skylivey/s1barch/issues)
 
