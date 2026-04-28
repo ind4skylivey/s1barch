@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  GET ACTIVE ENV - Get current active environment
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/detection/get_active_env.sh
+#  Usage: source ~/.local/s1barch/scripts/detection/get_active_env.sh
 #  Output: Current environment name
 #  ============================================================
 

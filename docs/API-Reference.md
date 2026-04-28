@@ -22,7 +22,7 @@ Common utility functions used across all S1Bs1stem scripts.
 
 ### Location
 
-`~/Desktop/S1Bs1stem/scripts/common/functions.sh`
+`~/.local/s1barch/scripts/common/functions.sh`
 
 ### Functions Reference
 
@@ -237,7 +237,7 @@ Logging functions for consistent and colorized logging across all scripts.
 
 ### Location
 
-`~/Desktop/S1Bs1stem/scripts/common/logger.sh`
+`~/.local/s1barch/scripts/common/logger.sh`
 
 ### Functions Reference
 
@@ -514,7 +514,7 @@ Color definitions and functions for consistent color usage.
 
 ### Location
 
-`~/Desktop/S1Bs1stem/scripts/common/colors.sh`
+`~/.local/s1barch/scripts/common/colors.sh`
 
 ### Color Constants
 
@@ -663,7 +663,7 @@ Functions for detecting hardware capabilities (battery, lid, audio system).
 
 ### Location
 
-`~/Desktop/S1Bs1stem/scripts/common/functions.sh`
+`~/.local/s1barch/scripts/common/functions.sh`
 
 ### Functions Reference
 
@@ -737,7 +737,7 @@ Functions for detecting and managing audio systems (PulseAudio, PipeWire).
 
 ### Location
 
-`~/Desktop/S1Bs1stem/scripts/common/functions.sh`
+`~/.local/s1barch/scripts/common/functions.sh`
 
 ### Functions Reference
 
@@ -884,52 +884,52 @@ audio_mic_toggle_mute
 
 #### audio_status.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh`
+**Location:** `~/.local/s1barch/scripts/audio/audio_status.sh`
 
 **API:**
 
 ```bash
 # Show full audio status
-~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh
+~/.local/s1barch/scripts/audio/audio_status.sh
 
 # Show short status
-~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh --short
+~/.local/s1barch/scripts/audio/audio_status.sh --short
 
 # Show device list
-~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh --devices
+~/.local/s1barch/scripts/audio/audio_status.sh --devices
 
 # Show volume only
-~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh --volume
+~/.local/s1barch/scripts/audio/audio_status.sh --volume
 ```
 
 ---
 
 #### audio_control.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh`
+**Location:** `~/.local/s1barch/scripts/audio/audio_control.sh`
 
 **API:**
 
 ```bash
 # Volume up (default: 5%)
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh up
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh up 10
+~/.local/s1barch/scripts/audio/audio_control.sh up
+~/.local/s1barch/scripts/audio/audio_control.sh up 10
 
 # Volume down (default: 5%)
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh down
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh down 10
+~/.local/s1barch/scripts/audio/audio_control.sh down
+~/.local/s1barch/scripts/audio/audio_control.sh down 10
 
 # Set volume
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh set 50
+~/.local/s1barch/scripts/audio/audio_control.sh set 50
 
 # Toggle mute
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh mute
+~/.local/s1barch/scripts/audio/audio_control.sh mute
 
 # Toggle mic mute
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh micmute
+~/.local/s1barch/scripts/audio/audio_control.sh micmute
 
 # Unmute
-~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh unmute
+~/.local/s1barch/scripts/audio/audio_control.sh unmute
 ```
 
 ---
@@ -938,47 +938,47 @@ audio_mic_toggle_mute
 
 #### battery_status.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh`
+**Location:** `~/.local/s1barch/scripts/battery/battery_status.sh`
 
 **API:**
 
 ```bash
 # Show full battery status
-~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh
+~/.local/s1barch/scripts/battery/battery_status.sh
 
 # Show short status
-~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh --short
+~/.local/s1barch/scripts/battery/battery_status.sh --short
 
 # Show battery percentage only
-~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh --percentage
+~/.local/s1barch/scripts/battery/battery_status.sh --percentage
 
 # Show battery time remaining
-~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh --time
+~/.local/s1barch/scripts/battery/battery_status.sh --time
 
 # Show battery health
-~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh --health
+~/.local/s1barch/scripts/battery/battery_status.sh --health
 ```
 
 ---
 
 #### battery_threshold.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/battery/battery_threshold.sh`
+**Location:** `~/.local/s1barch/scripts/battery/battery_threshold.sh`
 
 **API:**
 
 ```bash
 # Set low threshold (default: 20)
-~/Desktop/S1Bs1stem/scripts/battery/battery_threshold.sh low 20
+~/.local/s1barch/scripts/battery/battery_threshold.sh low 20
 
 # Set critical threshold (default: 10)
-~/Desktop/S1Bs1stem/scripts/battery/battery_threshold.sh critical 10
+~/.local/s1barch/scripts/battery/battery_threshold.sh critical 10
 
 # Check threshold
-~/Desktop/S1Bs1stem/scripts/battery/battery_threshold.sh check
+~/.local/s1barch/scripts/battery/battery_threshold.sh check
 
 # Show current thresholds
-~/Desktop/S1Bs1stem/scripts/battery/battery_threshold.sh show
+~/.local/s1barch/scripts/battery/battery_threshold.sh show
 ```
 
 ---
@@ -987,53 +987,53 @@ audio_mic_toggle_mute
 
 #### network_status.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/networking/network_status.sh`
+**Location:** `~/.local/s1barch/scripts/networking/network_status.sh`
 
 **API:**
 
 ```bash
 # Show full network status
-~/Desktop/S1Bs1stem/scripts/networking/network_status.sh
+~/.local/s1barch/scripts/networking/network_status.sh
 
 # Show short status
-~/Desktop/S1Bs1stem/scripts/networking/network_status.sh --short
+~/.local/s1barch/scripts/networking/network_status.sh --short
 
 # Show connection type only
-~/Desktop/S1Bs1stem/scripts/networking/network_status.sh --type
+~/.local/s1barch/scripts/networking/network_status.sh --type
 
 # Show IP addresses
-~/Desktop/S1Bs1stem/scripts/networking/network_status.sh --ip
+~/.local/s1barch/scripts/networking/network_status.sh --ip
 
 # Show signal strength (WiFi)
-~/Desktop/S1Bs1stem/scripts/networking/network_status.sh --signal
+~/.local/s1barch/scripts/networking/network_status.sh --signal
 ```
 
 ---
 
 #### dns_switch.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh`
+**Location:** `~/.local/s1barch/scripts/networking/dns_switch.sh`
 
 **API:**
 
 ```bash
 # Switch to Cloudflare DNS
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh cloudflare
+~/.local/s1barch/scripts/networking/dns_switch.sh cloudflare
 
 # Switch to Google DNS
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh google
+~/.local/s1barch/scripts/networking/dns_switch.sh google
 
 # Switch to Quad9 DNS
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh quad9
+~/.local/s1barch/scripts/networking/dns_switch.sh quad9
 
 # Restore system DNS
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh restore
+~/.local/s1barch/scripts/networking/dns_switch.sh restore
 
 # Show current DNS
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh --current
+~/.local/s1barch/scripts/networking/dns_switch.sh --current
 
 # Show DNS menu
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh
+~/.local/s1barch/scripts/networking/dns_switch.sh
 ```
 
 ---
@@ -1042,50 +1042,50 @@ audio_mic_toggle_mute
 
 #### system_info.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/system/system_info.sh`
+**Location:** `~/.local/s1barch/scripts/system/system_info.sh`
 
 **API:**
 
 ```bash
 # Show full system info
-~/Desktop/S1Bs1stem/scripts/system/system_info.sh
+~/.local/s1barch/scripts/system/system_info.sh
 
 # Show CPU info only
-~/Desktop/S1Bs1stem/scripts/system/system_info.sh --cpu
+~/.local/s1barch/scripts/system/system_info.sh --cpu
 
 # Show memory info only
-~/Desktop/S1Bs1stem/scripts/system/system_info.sh --memory
+~/.local/s1barch/scripts/system/system_info.sh --memory
 
 # Show disk info only
-~/Desktop/S1Bs1stem/scripts/system/system_info.sh --disk
+~/.local/s1barch/scripts/system/system_info.sh --disk
 
 # Show uptime only
-~/Desktop/S1Bs1stem/scripts/system/system_info.sh --uptime
+~/.local/s1barch/scripts/system/system_info.sh --uptime
 ```
 
 ---
 
 #### service_status.sh
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/system/service_status.sh`
+**Location:** `~/.local/s1barch/scripts/system/service_status.sh`
 
 **API:**
 
 ```bash
 # Show all services
-~/Desktop/S1Bs1stem/scripts/system/service_status.sh
+~/.local/s1barch/scripts/system/service_status.sh
 
 # Show specific service
-~/Desktop/S1Bs1stem/scripts/system/service_status.sh --service NetworkManager
+~/.local/s1barch/scripts/system/service_status.sh --service NetworkManager
 
 # Show failed services
-~/Desktop/S1Bs1stem/scripts/system/service_status.sh --failed
+~/.local/s1barch/scripts/system/service_status.sh --failed
 
 # Show enabled services
-~/Desktop/S1Bs1stem/scripts/system/service_status.sh --enabled
+~/.local/s1barch/scripts/system/service_status.sh --enabled
 
 # Show disabled services
-~/Desktop/S1Bs1stem/scripts/system/service_status.sh --disabled
+~/.local/s1barch/scripts/system/service_status.sh --disabled
 ```
 
 ---

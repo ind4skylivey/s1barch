@@ -22,7 +22,7 @@ S1Bs1stem includes a flexible theming system for colors, fonts, and UI elements.
 
 ### Color Schemes
 
-Default color schemes are defined in `~/Desktop/S1Bs1stem/scripts/common/colors.sh`:
+Default color schemes are defined in `~/.local/s1barch/scripts/common/colors.sh`:
 
 ```bash
 # Default colors
@@ -146,8 +146,8 @@ Customize Zsh in `~/.zshrc`:
 
 ```bash
 # Load S1Bs1stem shell setup
-if [ -f ~/Desktop/S1Bs1stem/scripts/shell/zsh_setup.sh ]; then
-    source ~/Desktop/S1Bs1stem/scripts/shell/zsh_setup.sh
+if [ -f ~/.local/s1barch/scripts/shell/zsh_setup.sh ]; then
+    source ~/.local/s1barch/scripts/shell/zsh_setup.sh
 fi
 
 # Custom aliases
@@ -189,8 +189,8 @@ Customize Fish in `~/.config/fish/config.fish`:
 
 ```fish
 # Load S1Bs1stem shell setup
-if test -f ~/Desktop/S1Bs1stem/scripts/shell/fish_setup.fish
-    source ~/Desktop/S1Bs1stem/scripts/shell/fish_setup.fish
+if test -f ~/.local/s1barch/scripts/shell/fish_setup.fish
+    source ~/.local/s1barch/scripts/shell/fish_setup.fish
 end
 
 # Custom aliases
@@ -477,10 +477,10 @@ update_bar() {
     KERNEL=$(uname -r)
     
     # Network info
-    NETWORK=$(~/Desktop/S1Bs1stem/scripts/networking/network_status.sh --short)
+    NETWORK=$(~/.local/s1barch/scripts/networking/network_status.sh --short)
     
     # Audio info
-    AUDIO=$(~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh --short)
+    AUDIO=$(~/.local/s1barch/scripts/audio/audio_status.sh --short)
     
     # Date and time
     DATE=$(date '+%Y-%m-%d')
@@ -694,7 +694,7 @@ Compile packages with custom flags:
 mkdir -p ~/builds/custom-dwm
 cd ~/builds/custom-dwm
 git clone https://git.suckless.org/dwm .
-git apply ~/Desktop/S1Bs1stem/patches/dwm/custom.patch
+git apply ~/.local/s1barch/patches/dwm/custom.patch
 makepkg -si
 ```
 
@@ -707,10 +707,10 @@ Apply custom patches to packages:
 cd ~/.local/src/dwm
 
 # Add gaps patch
-patch -p1 < ~/Desktop/S1Bs1stem/patches/dwm/dwm-gaps-6.2.diff
+patch -p1 < ~/.local/s1barch/patches/dwm/dwm-gaps-6.2.diff
 
 # Add center patch
-patch -p1 < ~/Desktop/S1Bs1stem/patches/dwm/dwm-center-6.2.diff
+patch -p1 < ~/.local/s1barch/patches/dwm/dwm-center-6.2.diff
 
 # Recompile
 sudo make install
@@ -742,7 +742,7 @@ update-desktop-database ~/.local/share/applications
 
 | Customization | File | Command |
 |:---|:---:|:---:|
-| **Colors** | `~/Desktop/S1Bs1stem/scripts/common/colors.sh` | Edit color variables |
+| **Colors** | `~/.local/s1barch/scripts/common/colors.sh` | Edit color variables |
 | **DWM Config** | `~/.local/src/dwm/config.h` | Edit config.h and recompile |
 | **Rofi Theme** | `~/.config/rofi/custom.rasi` | Create custom theme |
 | **Zsh Config** | `~/.zshrc` | Edit .zshrc |

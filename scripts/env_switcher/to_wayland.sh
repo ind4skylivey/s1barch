@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  TO WAYLAND - Switch to Wayland/Waybar
-#  Usage: bash ~/Desktop/S1Bs1stem/scripts/env_switcher/to_wayland.sh
+#  Usage: bash ~/.local/s1barch/scripts/env_switcher/to_wayland.sh
 #  ============================================================
 
 set -euo pipefail

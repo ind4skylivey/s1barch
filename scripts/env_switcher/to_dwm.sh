@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  TO DWM - Switch to DWM environment
-#  Usage: bash ~/Desktop/S1Bs1stem/scripts/env_switcher/to_dwm.sh
+#  Usage: bash ~/.local/s1barch/scripts/env_switcher/to_dwm.sh
 #  ============================================================
 
 set -euo pipefail

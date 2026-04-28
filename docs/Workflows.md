@@ -56,9 +56,9 @@ graph TD
 
 | Component | Purpose | Location |
 |:---||---:|:---:|
-| **Workflow Scripts** | `scripts/workflow/` | `~/Desktop/S1Bs1stem/workflow/` |
-| **Workflow Profiles** | `workflow/profiles/` | `~/Desktop/S1Bs1stem/workflow/profiles/` |
-| **Zellij Layouts** | `workflow/zellij/layouts/` | `~/Desktop/S1Bs1stem/workflow/zellij/layouts/` |
+| **Workflow Scripts** | `scripts/workflow/` | `~/.local/s1barch/workflow/` |
+| **Workflow Profiles** | `workflow/profiles/` | `~/.local/s1barch/workflow/profiles/` |
+| **Zellij Layouts** | `workflow/zellij/layouts/` | `~/.local/s1barch/workflow/zellij/layouts/` |
 | **Workflow Menu** | `scripts/workflow/ws-menu.sh` | `~/Desktop/S1Bs1Bs1stem/scripts/workflow/` |
 | **Switch Script** | `scripts/workflow/switch_workflow.sh` | `~/Desktop/S1Bs1Bs1stem/scripts/workflow/` |
 
@@ -412,7 +412,7 @@ selected=$(echo -e "Local Development\nRemote Server\nDeep Write\nRed Team" | ro
 # Switch to selected workflow
 case "$selected" in
     "Local Development")
-        ~/Desktop/S1Bs1stem/scripts/workflow/switch_workflow.sh local
+        ~/.local/s1barch/scripts/workflow/switch_workflow.sh local
         ;;
     "Remote Server")
         ~/Desktop/S1Bs1Bs1stem/scripts/workflow/switch_workflow.sh remote
@@ -435,7 +435,7 @@ esac
 
 ```bash
 # In write profile - lower volume
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 audio_volume_down
 
 # In redteam profile - mute microphone
@@ -447,7 +447,7 @@ audio_mic_toggle_mute
 
 ```bash
 # In remote profile - connect VPN
-~/Desktop/S1Bs1stem/scripts/networking/vpn_connect.sh connect work_vpn.ovpn
+~/.local/s1barch/scripts/networking/vpn_connect.sh connect work_vpn.ovpn
 
 # In redteam profile - connect Tailscale
 ~/Desktop/S1Bs1Bs1stem/scripts/networking/tailscale_toggle.sh on

@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  DETECT SERVICES - Detect active services
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/detection/detect_services.sh
+#  Usage: source ~/.local/s1barch/scripts/detection/detect_services.sh
 #  Output: List of active services
 #  ============================================================
 

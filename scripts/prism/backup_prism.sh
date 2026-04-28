@@ -53,7 +53,7 @@ backup_prism() {
 
 ## Restore Instructions
 \`\`\`bash
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 ./scripts/prism/backup_prism.sh restore <backup-timestamp>
 \`\`\`
 

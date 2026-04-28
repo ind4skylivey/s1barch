@@ -2,7 +2,7 @@
 # ============================================================
 #  S1Bs1stem - DEPENDENCY VALIDATOR
 #  ============================================================
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/common/validator.sh
+#  Usage: source ~/.local/s1barch/scripts/common/validator.sh
 #  Purpose: Validate system dependencies before installation
 #  Inspired by: S1B pre-flight checks
 #  License: MIT

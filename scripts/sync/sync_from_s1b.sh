@@ -2,7 +2,7 @@
 # ============================================================
 #  SYNC FROM S1B - Sync configs from dotfiles-s1b
 #  Strategy: OVERWRITE (per user's choice)
-#  Usage: bash ~/Desktop/S1Bs1stem/scripts/sync/sync_from_s1b.sh
+#  Usage: bash ~/.local/s1barch/scripts/sync/sync_from_s1b.sh
 #  ============================================================
 
 set -euo pipefail
