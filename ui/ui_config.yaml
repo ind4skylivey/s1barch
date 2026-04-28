@@ -18,7 +18,7 @@ tabs:
 
 # System Paths
 paths:
-  s1b_root: ~/Desktop/S1Bs1stem
+  s1b_root: ~/.local/s1barch
   dotfiles_s1b: ~/Desktop/dotfiles-s1b
   wallpapers: ~/Pictures/wallpapers
   logs: ~/.s1b_logs

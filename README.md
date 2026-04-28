@@ -222,10 +222,10 @@ bash <(curl -fsSL https://raw.githubusercontent.com/ind4skylivey/s1barch/main/in
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/ind4skylivey/s1barch.git ~/Desktop/S1Bs1stem
+git clone https://github.com/ind4skylivey/s1barch.git ~/.local/s1barch
 
 # 2. Navigate to directory
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 
 # 3. Run orchestrator
 ./install/ORCHESTRA.sh

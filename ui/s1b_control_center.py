@@ -50,7 +50,7 @@ class S1BControlCenter:
     
     def load_config(self):
         """Load UI configuration"""
-        config_path = os.path.expanduser("~/Desktop/S1Bs1stem/ui/ui_config.yaml")
+        config_path = os.path.expanduser("~/.local/s1barch/ui/ui_config.yaml")
         default_config = {
             'theme': 'catppuccin_mauve',
             'auto_refresh': True,
@@ -489,7 +489,7 @@ class S1BControlCenter:
     def _run_orchestra_thread(self):
         """Run ORCHESTRA in background"""
         self.status_bar.config(text="Running ORCHESTRA...")
-        success, stdout, stderr = self.run_command("bash ~/Desktop/S1Bs1stem/install/ORCHESTRA.sh --dry-run")
+        success, stdout, stderr = self.run_command("bash ~/.local/s1barch/install/ORCHESTRA.sh --dry-run")
         if success:
             messagebox.showinfo("Success", "ORCHESTRA dry-run completed successfully!")
         else:
@@ -504,7 +504,7 @@ class S1BControlCenter:
     def _clean_system_thread(self):
         """System cleanup in background"""
         self.status_bar.config(text="Cleaning system...")
-        self.run_command("bash ~/Desktop/S1Bs1stem/scripts/system/cleanup.sh")
+        self.run_command("bash ~/.local/s1barch/scripts/system/cleanup.sh")
         self.status_bar.config(text="System cleaned")
         messagebox.showinfo("Success", "System cleanup completed!")
     
@@ -516,7 +516,7 @@ class S1BControlCenter:
     def _create_snapshot_thread(self, name):
         """Create snapshot in background"""
         self.status_bar.config(text=f"Creating snapshot: {name}...")
-        success, stdout, stderr = self.run_command(f"bash ~/Desktop/S1Bs1stem/scripts/rollback/snapshot_create.sh {name}")
+        success, stdout, stderr = self.run_command(f"bash ~/.local/s1barch/scripts/rollback/snapshot_create.sh {name}")
         if success:
             messagebox.showinfo("Success", f"Snapshot '{name}' created!")
         else:
@@ -530,7 +530,7 @@ class S1BControlCenter:
     def _launch_workflow_thread(self, workflow):
         """Launch workflow in background"""
         self.status_bar.config(text=f"Launching workflow: {workflow}...")
-        self.run_command(f"bash ~/Desktop/S1Bs1stem/scripts/workflow/{workflow}.sh")
+        self.run_command(f"bash ~/.local/s1barch/scripts/workflow/{workflow}.sh")
         self.status_bar.config(text=f"Workflow {workflow} launched")
     
     def set_brightness(self, value):
@@ -553,12 +553,12 @@ class S1BControlCenter:
     
     def next_wallpaper(self):
         """Cycle to next wallpaper"""
-        self.run_command("bash ~/Desktop/S1Bs1stem/scripts/display/wallpaper_cycle.sh cycle")
+        self.run_command("bash ~/.local/s1barch/scripts/display/wallpaper_cycle.sh cycle")
         self.status_bar.config(text="Wallpaper changed")
     
     def random_wallpaper(self):
         """Set random wallpaper"""
-        self.run_command("bash ~/Desktop/S1Bs1stem/scripts/display/wallpaper_cycle.sh random")
+        self.run_command("bash ~/.local/s1barch/scripts/display/wallpaper_cycle.sh random")
         self.status_bar.config(text="Random wallpaper set")
     
     def toggle_mute(self):
@@ -568,12 +568,12 @@ class S1BControlCenter:
     
     def toggle_wifi(self):
         """Toggle WiFi"""
-        self.run_command("bash ~/Desktop/S1Bs1stem/scripts/networking/wifi_toggle.sh --toggle")
+        self.run_command("bash ~/.local/s1barch/scripts/networking/wifi_toggle.sh --toggle")
         self.refresh_network()
     
     def toggle_vpn(self):
         """Toggle VPN"""
-        self.run_command("bash ~/Desktop/S1Bs1stem/scripts/networking/vpn_connect.sh --toggle")
+        self.run_command("bash ~/.local/s1barch/scripts/networking/vpn_connect.sh --toggle")
     
     def check_internet(self):
         """Check internet connectivity"""
@@ -585,7 +585,7 @@ class S1BControlCenter:
     
     def refresh_network(self):
         """Refresh network status"""
-        success, status, _ = self.run_command("bash ~/Desktop/S1Bs1stem/scripts/networking/network_status.sh 2>&1 | head -20")
+        success, status, _ = self.run_command("bash ~/.local/s1barch/scripts/networking/network_status.sh 2>&1 | head -20")
         if success:
             self.net_status_label.config(text=status[:200] + "...")
     
@@ -596,12 +596,12 @@ class S1BControlCenter:
     
     def show_system_info(self):
         """Menu: Show system info"""
-        self.run_command("bash ~/Desktop/S1Bs1stem/scripts/system/system_info.sh")
+        self.run_command("bash ~/.local/s1barch/scripts/system/system_info.sh")
     
     def clear_logs(self):
         """Menu: Clear logs"""
         if messagebox.askyesno("Clear Logs", "Clear all S1Bs1stem logs?"):
-            self.run_command("bash ~/Desktop/S1Bs1stem/scripts/system/log_clean.sh")
+            self.run_command("bash ~/.local/s1barch/scripts/system/log_clean.sh")
             messagebox.showinfo("Success", "Logs cleared!")
     
     def restore_snapshot(self):
@@ -641,7 +641,7 @@ class S1BControlCenter:
     
     def open_docs(self):
         """Open documentation"""
-        self.run_command("xdg-open ~/Desktop/S1Bs1stem/README.md")
+        self.run_command("xdg-open ~/.local/s1barch/README.md")
     
     def show_about(self):
         """Show about dialog"""

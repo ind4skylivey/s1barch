@@ -53,8 +53,10 @@ jobs:
     - name: Setup S1Bs1stem directory
       run: |
         echo "Setting up S1Bs1stem directory..."
+        # GITHUB_WORKSPACE already contains the cloned repo
+        # Just point S1B_ROOT to it and create missing directories
         export S1B_ROOT="$GITHUB_WORKSPACE"
-        cp -r "$GITHUB_WORKSPACE" "$S1B_ROOT"
+        echo "S1B_ROOT=$S1B_ROOT" >> $GITHUB_ENV
         
         # Create workflow directory structure
         mkdir -p "$S1B_ROOT/workflow"

@@ -54,11 +54,11 @@ This guide covers the complete installation and setup process for S1Bs1stem auto
 ### One-Line Installation
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/ind4skylivey/S1Bs1stem/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/ind4skylivey/s1barch/main/install.sh)
 ```
 
 This command will:
-1. Clone S1Bs1stem to `~/Desktop/S1Bs1stem`
+1. Clone S1Bs1stem to `~/.local/s1barch`
 2. Make scripts executable
 3. Run the orchestrator
 4. Guide you through environment selection
@@ -67,10 +67,10 @@ This command will:
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/ind4skylivey/S1Bs1stem.git ~/Desktop/S1Bs1stem
+git clone https://github.com/ind4skylivey/s1barch.git ~/.local/s1barch
 
 # 2. Navigate to directory
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 
 # 3. Run orchestrator
 ./install/ORCHESTRA.sh
@@ -83,7 +83,7 @@ cd ~/Desktop/S1Bs1stem
 ### Normal Mode
 
 ```bash
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 ./install/ORCHESTRA.sh
 ```
 
@@ -248,7 +248,7 @@ killall waybar && waybar &  # Restart Waybar
 
 ```bash
 # Run system info check
-~/Desktop/S1Bs1stem/scripts/system/system_info.sh
+~/.local/s1barch/scripts/system/system_info.sh
 
 # Check if DWM is running
 pgrep dwm
@@ -257,7 +257,7 @@ pgrep dwm
 pgrep waybar
 
 # Check hardware detection
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 has_battery && echo "Laptop detected" || echo "Desktop detected"
 get_audio_system
 ```
@@ -266,7 +266,7 @@ get_audio_system
 
 ```bash
 # Launch workflow menu
-~/Desktop/S1Bs1stem/scripts/workflow/ws-menu.sh
+~/.local/s1barch/scripts/workflow/ws-menu.sh
 
 # Or use aliases (after sourcing)
 ws-local      # Local Development
@@ -289,13 +289,13 @@ ws-redteam     # Red Team
 cat ~/.s1b_install_*.log | tail -50
 
 # Check system requirements
-bash ~/Desktop/S1Bs1stem/install/preflight/000_system_check.sh
+bash ~/.local/s1barch/install/preflight/000_system_check.sh
 
 # Check dependencies
-bash ~/Desktop/S1Bs1stem/install/preflight/001_dependencies_check.sh
+bash ~/.local/s1barch/install/preflight/001_dependencies_check.sh
 
 # Check disk space
-bash ~/Desktop/S1Bs1stem/install/preflight/002_disk_space_check.sh
+bash ~/.local/s1barch/install/preflight/002_disk_space_check.sh
 ```
 
 ### Pre-flight Check Fails
@@ -321,11 +321,11 @@ bash --version  # Should be 4.0+
 **Solution:**
 ```bash
 # Make all scripts executable
-chmod +x ~/Desktop/S1Bs1stem/scripts/**/*.sh
-chmod +x ~/Desktop/S1Bs1stem/install/**/*.sh
+chmod +x ~/.local/s1barch/scripts/**/*.sh
+chmod +x ~/.local/s1barch/install/**/*.sh
 
 # Or run individual scripts
-bash ~/Desktop/S1Bs1stem/install/ORCHESTRA.sh
+bash ~/.local/s1barch/install/ORCHESTRA.sh
 ```
 
 ### Missing Dotfiles-s1b
@@ -338,7 +338,7 @@ bash ~/Desktop/S1Bs1stem/install/ORCHESTRA.sh
 git clone https://github.com/ind4skylivey/dotfiles-s1b.git ~/Desktop/dotfiles-s1b
 
 # Re-run ORCHESTRA.sh
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 ./install/ORCHESTRA.sh --reset
 ```
 
@@ -355,7 +355,7 @@ ps aux | grep -i orchestra
 pkill -9 orchestra
 
 # Reset and retry
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 ./install/ORCHESTRA.sh --reset
 ```
 
@@ -373,7 +373,7 @@ cat ~/.s1b_install_*.log
 cat ~/.s1b_logs/s1b_system.log
 
 # View last errors
-source ~/Desktop/S1Bs1stem/scripts/common/logger.sh
+source ~/.local/s1barch/scripts/common/logger.sh
 log_last_errors 20
 ```
 
@@ -381,10 +381,10 @@ log_last_errors 20
 
 ```bash
 # System information
-~/Desktop/S1Bs1stem/scripts/system/system_info.sh
+~/.local/s1barch/scripts/system/system_info.sh
 
 # Hardware detection
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 has_battery && echo "Battery: YES" || echo "Battery: NO (Desktop PC)"
 has_lid && echo "Lid: YES" || echo "Lid: NO (Desktop PC)"
 get_audio_system
@@ -414,7 +414,7 @@ After successful installation:
 1. ✅ **Logout and login** to apply shell changes
 2. ✅ **Restart your session** (DWM or Wayland)
 3. ✅ **Launch first workflow** with `ws-menu`
-4. ✅ **Explore automation scripts** in `~/Desktop/S1Bs1stem/scripts/`
+4. ✅ **Explore automation scripts** in `~/.local/s1barch/scripts/`
 5. ✅ **Customize** your environment to your liking
 
 ---
@@ -423,11 +423,11 @@ After successful installation:
 
 | Task | Command |
 |:---|:---:|
-| **Install S1Bs1stem** | `git clone https://github.com/ind4skylivey/S1Bs1stem.git ~/Desktop/S1Bs1stem && cd ~/Desktop/S1Bs1stem && ./install/ORCHESTRA.sh` |
-| **System Info** | `~/Desktop/S1Bs1stem/scripts/system/system_info.sh` |
-| **Hardware Check** | `source ~/Desktop/S1Bs1stem/scripts/common/functions.sh && has_battery && has_lid` |
-| **Workflow Menu** | `~/Desktop/S1Bs1stem/scripts/workflow/ws-menu.sh` |
-| **View Logs** | `source ~/Desktop/S1Bs1stem/scripts/common/logger.sh && log_tail` |
+| **Install S1Bs1stem** | `git clone https://github.com/ind4skylivey/s1barch.git ~/.local/s1barch && cd ~/.local/s1barch && ./install/ORCHESTRA.sh` |
+| **System Info** | `~/.local/s1barch/scripts/system/system_info.sh` |
+| **Hardware Check** | `source ~/.local/s1barch/scripts/common/functions.sh && has_battery && has_lid` |
+| **Workflow Menu** | `~/.local/s1barch/scripts/workflow/ws-menu.sh` |
+| **View Logs** | `source ~/.local/s1barch/scripts/common/logger.sh && log_tail` |
 | **Reset Install** | `./install/ORCHESTRA.sh --reset` |
 
 ---

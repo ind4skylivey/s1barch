@@ -116,7 +116,7 @@ Configuration Locations:
 - Zellij: ~/.config/zellij
 - Neovim: ~/.config/nvim
 - Doom Emacs: ~/.config/emacs
-- Workflows: ~/Desktop/S1Bs1stem/workflow
+- Workflows: ~/.local/s1barch/workflow
 
 Log Location:
 - Installation Log: ~/.s1b_install_*.log

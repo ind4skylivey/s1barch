@@ -98,8 +98,8 @@ test_step "ORCHESTRA dry-run" "timeout 10 bash $INSTALL_DIR/ORCHESTRA.sh --dry-r
 test_step "ORCHESTRA help" "timeout 5 bash $INSTALL_DIR/ORCHESTRA.sh --help"
 
 # Test individual scripts
-test_step "Network status" "timeout 5 bash ~/Desktop/S1Bs1stem/scripts/networking/network_status.sh --help 2>/dev/null || true"
-test_step "System info" "timeout 5 bash ~/Desktop/S1Bs1stem/scripts/system/system_info.sh 2>/dev/null || true"
+test_step "Network status" "timeout 5 bash ~/.local/s1barch/scripts/networking/network_status.sh --help 2>/dev/null || true"
+test_step "System info" "timeout 5 bash ~/.local/s1barch/scripts/system/system_info.sh 2>/dev/null || true"
 
 # ============================================
 # PHASE 4: API Functions Test
@@ -147,13 +147,13 @@ EXECUTABLES=(
 )
 
 for file in "${EXECUTABLES[@]}"; do
-    if [[ -f ~/Desktop/S1Bs1stem/$file ]]; then
-        if [[ -x ~/Desktop/S1Bs1stem/$file ]]; then
+    if [[ -f ~/.local/s1barch/$file ]]; then
+        if [[ -x ~/.local/s1barch/$file ]]; then
             echo -e "$PASS $(basename $file) is executable"
             PASSED=$((PASSED + 1))
         else
             echo -e "$WARN $(basename $file) not executable (fixing...)"
-            chmod +x ~/Desktop/S1Bs1stem/$file
+            chmod +x ~/.local/s1barch/$file
             WARNINGS=$((WARNINGS + 1))
         fi
     fi
