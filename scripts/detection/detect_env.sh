@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  DETECT ENV - Detect active desktop environment
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/detection/detect_env.sh
+#  Usage: source ~/.local/s1barch/scripts/detection/detect_env.sh
 #  Output: "desktop:display_server" (e.g., "dwm:x11")
 #  ============================================================
 

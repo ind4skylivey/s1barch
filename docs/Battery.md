@@ -38,7 +38,7 @@ All battery scripts use these helper functions from `scripts/common/functions.sh
 
 ```bash
 # Source common functions
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 
 # Check hardware type
 if has_battery; then
@@ -73,7 +73,7 @@ fi
 
 ### Script Locations
 
-All battery scripts are in `~/Desktop/S1Bs1stem/scripts/battery/`
+All battery scripts are in `~/.local/s1barch/scripts/battery/`
 
 ---
 
@@ -83,7 +83,7 @@ All battery scripts are in `~/Desktop/S1Bs1stem/scripts/battery/`
 
 ```bash
 # Show battery status
-~/Desktop/S1Bs1stem/scripts/battery/battery_monitor.sh
+~/.local/s1barch/scripts/battery/battery_monitor.sh
 
 # Battery status in JSON format
 ~/Desktop/S1Bs1Bs1stem/scripts/battery/battery_monitor.sh --json
@@ -368,11 +368,11 @@ Set lid close action:
 
 | Task | Command | Works On |
 |:---|:---|:---:|
-| **Battery Status** | `~/Desktop/S1Bs1stem/scripts/battery/battery_monitor.sh` | Laptops only |
+| **Battery Status** | `~/.local/s1barch/scripts/battery/battery_monitor.sh` | Laptops only |
 | **Battery JSON** | `~/Desktop/S1Bs1Bs1Bs1stem/scripts/battery/battery_monitor.sh --json` | Laptops only |
 | **Battery History** | `~/Desktop/S1Bs1Bs1Bs1Bs1Bs1stem/scripts/battery/battery_monitor.sh --history` | Laptops only |
 | **Notifications** | `~/Desktop/S1Bs1Bs1Bs1stem/scripts/battery/battery_notify.sh start` | Laptops only |
-| **Power Saver On** | `~/Desktop/S1Bs1stem/scripts/battery/power_saver.sh` | Laptops only |
+| **Power Saver On** | `~/.local/s1barch/scripts/battery/power_saver.sh` | Laptops only |
 | **Power Saver Off** | `~/Desktop/S1Bs1Bs1Bs1Bs1stem/scripts/battery/power_saver_off.sh` | Laptops only |
 | **Lid Monitor** | `~/Desktop/S1Bs1Bs1Bs1stem/scripts/battery/lid_close.sh --monitor` | Laptops only |
 | **Lid State** | `~/Desktop/S1Bs1Bs1Bs1stem/scripts/battery/lid_close.sh --state` | Laptops only |

@@ -76,7 +76,7 @@ paru -S dwm-s1b
 ```bash
 # DWM setup is handled by ORCHESTRA.sh
 # Or run individually:
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 ./install/modules/010_dwm_setup.sh
 ```
 
@@ -205,19 +205,19 @@ Autostart automatically starts applications when DWM launches.
 **Usage:**
 ```bash
 # Start all autostart apps
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh start
+~/.local/s1barch/scripts/dwm/autostart.sh start
 
 # Stop specific app
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh stop picom
+~/.local/s1barch/scripts/dwm/autostart.sh stop picom
 
 # Restart specific app
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh restart dunst
+~/.local/s1barch/scripts/dwm/autostart.sh restart dunst
 
 # View status
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh status
+~/.local/s1barch/scripts/dwm/autostart.sh status
 
 # List all apps
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh list
+~/.local/s1barch/scripts/dwm/autostart.sh list
 ```
 
 ### Desktop vs Laptop Profiles
@@ -238,7 +238,7 @@ Autostart detects your hardware and loads appropriate profile:
 
 **Hardware Detection:**
 ```bash
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 
 if has_battery; then
     echo "Laptop profile loaded"
@@ -265,24 +265,24 @@ fi
 
 ```bash
 # Navigate windows
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh focus-next      # Focus next window
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh focus-prev      # Focus previous window
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh swap-master    # Swap with master
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh zoom            # Zoom focused window
+~/.local/s1barch/scripts/dwm/window_control.sh focus-next      # Focus next window
+~/.local/s1barch/scripts/dwm/window_control.sh focus-prev      # Focus previous window
+~/.local/s1barch/scripts/dwm/window_control.sh swap-master    # Swap with master
+~/.local/s1barch/scripts/dwm/window_control.sh zoom            # Zoom focused window
 
 # Window states
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-float    # Toggle floating mode
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-fullscreen  # Toggle fullscreen
+~/.local/s1barch/scripts/dwm/window_control.sh toggle-float    # Toggle floating mode
+~/.local/s1barch/scripts/dwm/window_control.sh toggle-fullscreen  # Toggle fullscreen
 
 # Tag management
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh switch-tag 3   # Switch to tag 3
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh move-to-tag 3  # Move to tag 3
+~/.local/s1barch/scripts/dwm/window_control.sh switch-tag 3   # Switch to tag 3
+~/.local/s1barch/scripts/dwm/window_control.sh move-to-tag 3  # Move to tag 3
 
 # Kill window
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh kill            # Kill focused window
+~/.local/s1barch/scripts/dwm/window_control.sh kill            # Kill focused window
 
 # Window info
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh info
+~/.local/s1barch/scripts/dwm/window_control.sh info
 ```
 
 ### Default Keybindings
@@ -400,10 +400,10 @@ sudo make clean install
 **Solutions:**
 ```bash
 # Check autostart script status
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh status
+~/.local/s1barch/scripts/dwm/autostart.sh status
 
 # Start autostart manually
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh start
+~/.local/s1barch/scripts/dwm/autostart.sh start
 
 # Check autostart configuration
 cat ~/.config/dwm/autostart.sh
@@ -419,13 +419,13 @@ cat ~/.config/dwm/autostart.sh
 xdotool getactivewindow getwindowclassname
 
 # Manually apply rules
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh apply
+~/.local/s1barch/scripts/dwm/window_rules.sh apply
 
 # List current rules
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh list
+~/.local/s1barch/scripts/dwm/window_rules.sh list
 
 # Generate sample rules
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh generate
+~/.local/s1barch/scripts/dwm/window_rules.sh generate
 ```
 
 ### DWM Compilation Fails
@@ -470,9 +470,9 @@ pgrep waybar
 |:---|:---:|
 | **DWM Status** | `pgrep dwm` |
 | **Restart DWM** | `killall dwm && dwm &` |
-| **Window Control** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh --help` |
-| **Window Rules** | `~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh --help` |
-| **Autostart** | `~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh --help` |
+| **Window Control** | `~/.local/s1barch/scripts/dwm/window_control.sh --help` |
+| **Window Rules** | `~/.local/s1barch/scripts/dwm/window_rules.sh --help` |
+| **Autostart** | `~/.local/s1barch/scripts/dwm/autostart.sh --help` |
 | **DWM Config** | `~/.config/dwm/config.h` |
 | **DWM Logs** | `~/.xsession-errors` |
 

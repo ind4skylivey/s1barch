@@ -2,7 +2,7 @@
 # ============================================================
 #  S1Bs1stem - ADVANCED LOGGING SYSTEM
 #  ============================================================
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/common/logger.sh
+#  Usage: source ~/.local/s1barch/scripts/common/logger.sh
 #  Features: Color logging, file logging, log rotation
 #  Inspired by: S1B dotfiles
 #  License: MIT

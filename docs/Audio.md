@@ -37,7 +37,7 @@ All audio scripts use these helper functions from `scripts/common/functions.sh`:
 
 ```bash
 # Source common functions
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 
 # Check audio system
 AUDIO_SYSTEM=$(get_audio_system)
@@ -74,7 +74,7 @@ esac
 
 ### Script Locations
 
-All audio scripts are in `~/Desktop/S1Bs1stem/scripts/audio/`
+All audio scripts are in `~/.local/s1barch/scripts/audio/`
 
 ---
 
@@ -84,26 +84,26 @@ All audio scripts are in `~/Desktop/S1Bs1stem/scripts/audio/`
 
 ```bash
 # Volume up by 5%
-~/Desktop/S1Bs1stem/scripts/audio/volume_slider.sh up
+~/.local/s1barch/scripts/audio/volume_slider.sh up
 
 # Volume down by 5%
-~/Desktop/S1Bs1stem/scripts/audio/volume_slider.sh down
+~/.local/s1barch/scripts/audio/volume_slider.sh down
 
 # Set volume to 50%
-~/Desktop/S1Bs1stem/scripts/audio/volume_slider.sh set 50
+~/.local/s1barch/scripts/audio/volume_slider.sh set 50
 
 # Toggle mute
-~/Desktop/S1Bs1stem/scripts/audio/volume_slider.sh mute
+~/.local/s1barch/scripts/audio/volume_slider.sh mute
 
 # Get current volume
-~/Desktop/S1Bs1stem/scripts/audio/volume_slider.sh get
+~/.local/s1barch/scripts/audio/volume_slider.sh get
 ```
 
 ### Microphone Toggle
 
 ```bash
 # Toggle microphone mute/unmute
-~/Desktop/S1Bs1stem/scripts/audio/mic_switch.sh
+~/.local/s1barch/scripts/audio/mic_switch.sh
 ```
 
 ### Audio Output Switching
@@ -113,23 +113,23 @@ All audio scripts are in `~/Desktop/S1Bs1stem/scripts/audio/`
 ~/Desktop/S1Bs1Bs1stem/scripts/audio/audio_output.sh --menu
 
 # List all available output devices
-~/Desktop/S1Bs1stem/scripts/audio/audio_output.sh --list
+~/.local/s1barch/scripts/audio/audio_output.sh --list
 
 # Set specific output device by name
-~/Desktop/S1Bs1stem/scripts/audio_output.sh --set "alsa_output.pci-0000_00"
+~/.local/s1barch/scripts/audio_output.sh --set "alsa_output.pci-0000_00"
 
 # Move all streams to specific output
-~/Desktop/S1Bs1stem/scripts/audio/audio_output.sh --move "alsa_output.pci-0000_00"
+~/.local/s1barch/scripts/audio/audio_output.sh --move "alsa_output.pci-0000_00"
 ```
 
 ### Desktop Environment Scripts
 
 ```bash
 # DWM-specific audio switching
-~/Desktop/S1Bs1stem/scripts/audio/audio_switch_dwm.sh
+~/.local/s1barch/scripts/audio/audio_switch_dwm.sh
 
 # Wayland-specific audio switching
-~/Desktop/S1Bs1stem/scripts/audio_switch_wayland.sh
+~/.local/s1barch/scripts/audio_switch_wayland.sh
 ```
 
 ---
@@ -175,7 +175,7 @@ pactl info  # Should show audio devices
 **Solution:**
 ```bash
 # Check audio system
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 get_audio_system
 
 # List audio devices
@@ -336,14 +336,14 @@ sudoedit /etc/pipewire/pipewire.conf
 
 | Task | Command | System |
 |:---|:---|:---:|
-| **Volume Up** | `~/Desktop/S1Bs1stem/scripts/audio/volume_slider.sh up` | Both |
-| **Volume Down** | `~/Desktop/S1Bs1stem/scripts/audio/volume_slider.sh down` | Both |
+| **Volume Up** | `~/.local/s1barch/scripts/audio/volume_slider.sh up` | Both |
+| **Volume Down** | `~/.local/s1barch/scripts/audio/volume_slider.sh down` | Both |
 | **Volume Set** | `~/Desktop/S1Bs1Bs1stem/scripts/audio/volume_slider.sh set 50` | Both |
 | **Volume Mute** | `~/Desktop/S1Bs1Bs1stem/scripts/audio/volume_slider.sh mute` | Both |
 | **Mic Toggle** | `~/Desktop/S1Bs1Bs1stem/scripts/audio/mic_switch.sh` | Both |
 | **Output Menu** | `~/Desktop/S1Bs1Bs1stem/scripts/audio/audio_output.sh --menu` | Both |
 | **List Outputs** | `~/Desktop/S1Bs1Bs1stem/scripts/audio/audio_output.sh --list` | Both |
-| **Set Output** | `~/Desktop/S1Bs1stem/scripts/audio/audio_output.sh --set <name>` | Both |
+| **Set Output** | `~/.local/s1barch/scripts/audio/audio_output.sh --set <name>` | Both |
 | **DWM Switch** | `~/Desktop/S1Bs1Bs1stem/scripts/audio/audio_switch_dwm.sh` | DWM |
 | **Wayland Switch** | `~/Desktop/S1Bs1Bs1stem/scripts/audio/audio_switch_wayland.sh` | Wayland |
 

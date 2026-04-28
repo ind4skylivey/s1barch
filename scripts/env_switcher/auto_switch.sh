@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  AUTO SWITCH - Auto-switch environment based on detection
-#  Usage: bash ~/Desktop/S1Bs1stem/scripts/env_switcher/auto_switch.sh
+#  Usage: bash ~/.local/s1barch/scripts/env_switcher/auto_switch.sh
 #  ============================================================
 
 set -euo pipefail

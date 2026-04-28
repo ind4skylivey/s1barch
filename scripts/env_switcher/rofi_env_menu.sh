@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 #  ROFI ENV MENU - Rofi menu for environment switching
-#  Usage: bash ~/Desktop/S1Bs1stem/scripts/env_switcher/rofi_env_menu.sh
+#  Usage: bash ~/.local/s1barch/scripts/env_switcher/rofi_env_menu.sh
 #  ============================================================
 
 set -euo pipefail

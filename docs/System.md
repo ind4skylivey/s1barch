@@ -28,7 +28,7 @@ Comprehensive system information display including:
 
 ### Script
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/system/system_info.sh`
+**Location:** `~/.local/s1barch/scripts/system/system_info.sh`
 
 ### Usage
 
@@ -80,7 +80,7 @@ Package management information including:
 
 ```bash
 # Show package info
-~/Desktop/S1Bs1stem/scripts/system/package_info.sh
+~/.local/s1barch/scripts/system/package_info.sh
 
 # List upgradable packages
 ~/Desktop/S1Bs1Bstem/scripts/system/package_info.sh --upgradable
@@ -118,7 +118,7 @@ Systemd service status monitoring including:
 
 ### Script
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/system/service_status.sh`
+**Location:** `~/.local/s1barch/scripts/system/service_status.sh`
 
 ### Usage
 

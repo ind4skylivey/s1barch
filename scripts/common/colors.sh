@@ -2,7 +2,7 @@
 # ============================================================
 #  S1Bs1stem - COLOR DEFINITIONS
 #  ============================================================
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/common/colors.sh
+#  Usage: source ~/.local/s1barch/scripts/common/colors.sh
 #  Purpose: Consistent color scheme across all scripts
 #  Inspired by: Catppuccin theme
 #  License: MIT

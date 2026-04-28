@@ -29,13 +29,13 @@ Shows comprehensive network information including:
 
 ### Script
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/networking/network_status.sh`
+**Location:** `~/.local/s1barch/scripts/networking/network_status.sh`
 
 ### Usage
 
 ```bash
 # Show network status
-~/Desktop/S1Bs1stem/scripts/networking/network_status.sh
+~/.local/s1barch/scripts/networking/network_status.sh
 
 # Watch for changes
 watch -n 5 ~/Desktop/S1Bs1Bs1stem/scripts/networking/network_status.sh
@@ -373,7 +373,7 @@ Quick VNC connection to iPhone for screen mirroring and control.
 
 ### Script
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/networking/iphone_vnc.sh`
+**Location:** `~/.local/s1barch/scripts/networking/iphone_vnc.sh`
 
 ### Usage
 
@@ -502,7 +502,7 @@ nmcli device wifi connect <wifi-ssid> password <password>
 ~/Desktop/S1Bs1Bs1Bs1Bs1stem/scripts/networking/dns_switch.sh --current
 
 # Diagnose issues
-source ~/Desktop/S1Bs1stem/scripts/system/system_info.sh
+source ~/.local/s1barch/scripts/system/system_info.sh
 log_last_errors 10
 ```
 

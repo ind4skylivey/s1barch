@@ -29,7 +29,7 @@ S1Bs1stem provides a comprehensive screenshot tool with multiple capture modes.
 
 ### Script Location
 
-`~/Desktop/S1Bs1stem/scripts/display/screenshot.sh`
+`~/.local/s1barch/scripts/display/screenshot.sh`
 
 ---
 
@@ -45,7 +45,7 @@ S1Bs1stem provides a comprehensive screenshot tool with multiple capture modes.
 OUTPUT_DIR="$HOME/Pictures/screenshots"
 mkdir -p "$OUTPUT_DIR"
 
-~/Desktop/S1Bs1stem/scripts/display/screenshot.sh full --output "$OUTPUT_DIR"
+~/.local/s1barch/scripts/display/screenshot.sh full --output "$OUTPUT_DIR"
 ```
 
 ### Selection Capture

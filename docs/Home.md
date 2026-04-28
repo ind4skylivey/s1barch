@@ -46,10 +46,10 @@ bash <(curl -fsSL https://raw.githubusercontent.com/ind4skylivey/S1Bs1stem/main/
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/ind4skylivey/S1Bs1stem.git ~/Desktop/S1Bs1stem
+git clone https://github.com/ind4skylivey/S1Bs1stem.git ~/.local/s1barch
 
 # 2. Navigate to directory
-cd ~/Desktop/S1Bs1stem
+cd ~/.local/s1barch
 
 # 3. Run orchestrator
 ./install/ORCHESTRA.sh

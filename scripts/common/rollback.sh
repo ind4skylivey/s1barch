@@ -2,7 +2,7 @@
 # ============================================================
 #  S1Bs1stem - ROLLBACK & RECOVERY SYSTEM
 #  ============================================================
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/common/rollback.sh
+#  Usage: source ~/.local/s1barch/scripts/common/rollback.sh
 #  Purpose: Create, restore, and manage system snapshots
 #  Inspired by: S1B rollback system
 #  License: MIT

@@ -26,85 +26,85 @@ DWM window management automation including:
 
 ### Script
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh`
+**Location:** `~/.local/s1barch/scripts/dwm/window_control.sh`
 
 ### Usage
 
 ```bash
 # Show window control help
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh help
+~/.local/s1barch/scripts/dwm/window_control.sh help
 
 # Focus next window
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh next
+~/.local/s1barch/scripts/dwm/window_control.sh next
 
 # Focus previous window
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh prev
+~/.local/s1barch/scripts/dwm/window_control.sh prev
 
 # Focus window by number (1-9)
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh focus 1
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh focus 2
+~/.local/s1barch/scripts/dwm/window_control.sh focus 1
+~/.local/s1barch/scripts/dwm/window_control.sh focus 2
 
 # Kill focused window
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh kill
+~/.local/s1barch/scripts/dwm/window_control.sh kill
 
 # Kill window by number
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh kill 1
+~/.local/s1barch/scripts/dwm/window_control.sh kill 1
 
 # Toggle floating state
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-float
+~/.local/s1barch/scripts/dwm/window_control.sh toggle-float
 
 # Toggle fullscreen
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-fullscreen
+~/.local/s1barch/scripts/dwm/window_control.sh toggle-fullscreen
 
 # Move window to next monitor
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh move-next-monitor
+~/.local/s1barch/scripts/dwm/window_control.sh move-next-monitor
 
 # Move window to previous monitor
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh move-prev-monitor
+~/.local/s1barch/scripts/dwm/window_control.sh move-prev-monitor
 ```
 
 ### Tag Management
 
 ```bash
 # Switch to tag 1-9
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 1
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 2
+~/.local/s1barch/scripts/dwm/window_control.sh tag 1
+~/.local/s1barch/scripts/dwm/window_control.sh tag 2
 
 # View multiple tags
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh view 1 2
+~/.local/s1barch/scripts/dwm/window_control.sh view 1 2
 
 # Move window to tag
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh movetotag 1
+~/.local/s1barch/scripts/dwm/window_control.sh movetotag 1
 
 # Copy window to tag
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh copytotag 1
+~/.local/s1barch/scripts/dwm/window_control.sh copytotag 1
 
 # Toggle tag visibility
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggleview 1
+~/.local/s1barch/scripts/dwm/window_control.sh toggleview 1
 ```
 
 ### Layout Management
 
 ```bash
 # Toggle between tiled and floating layout
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-layout
+~/.local/s1barch/scripts/dwm/window_control.sh toggle-layout
 
 # Switch to specific layout
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh layout tiled
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh layout floating
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh layout monocle
+~/.local/s1barch/scripts/dwm/window_control.sh layout tiled
+~/.local/s1barch/scripts/dwm/window_control.sh layout floating
+~/.local/s1barch/scripts/dwm/window_control.sh layout monocle
 
 # Increase master area size
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh incmaster
+~/.local/s1barch/scripts/dwm/window_control.sh incmaster
 
 # Decrease master area size
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh decmaster
+~/.local/s1barch/scripts/dwm/window_control.sh decmaster
 
 # Increase number of master windows
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh incnmaster
+~/.local/s1barch/scripts/dwm/window_control.sh incnmaster
 
 # Decrease number of master windows
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh decnmaster
+~/.local/s1barch/scripts/dwm/window_control.sh decnmaster
 ```
 
 ---
@@ -117,35 +117,35 @@ DWM window rules allow automatic window placement and behavior based on window p
 
 ### Script
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh`
+**Location:** `~/.local/s1barch/scripts/dwm/window_rules.sh`
 
 ### Usage
 
 ```bash
 # Show current window rules
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh list
+~/.local/s1barch/scripts/dwm/window_rules.sh list
 
 # Add new window rule
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add --class "Alacritty" --tag "1" --floating false
+~/.local/s1barch/scripts/dwm/window_rules.sh add --class "Alacritty" --tag "1" --floating false
 
 # Add floating rule
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add --class "Pavucontrol" --floating true
+~/.local/s1barch/scripts/dwm/window_rules.sh add --class "Pavucontrol" --floating true
 
 # Add fullscreen rule
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh add --class "mpv" --fullscreen true
+~/.local/s1barch/scripts/dwm/window_control.sh add --class "mpv" --fullscreen true
 
 # Remove window rule
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh remove "Alacritty"
+~/.local/s1barch/scripts/dwm/window_rules.sh remove "Alacritty"
 
 # Clear all rules
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh clear
+~/.local/s1barch/scripts/dwm/window_rules.sh clear
 ```
 
 ### Rule Syntax
 
 ```bash
 # Basic rule syntax
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add \
+~/.local/s1barch/scripts/dwm/window_rules.sh add \
     --class "WindowClass" \
     --instance "WindowInstance" \
     --title "WindowTitle" \
@@ -155,15 +155,15 @@ DWM window rules allow automatic window placement and behavior based on window p
 
 # Examples:
 # Terminal on tag 1, tiled
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add \
+~/.local/s1barch/scripts/dwm/window_rules.sh add \
     --class "Alacritty" --tag "1" --floating false
 
 # Pavucontrol floating on tag 9
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add \
+~/.local/s1barch/scripts/dwm/window_rules.sh add \
     --class "Pavucontrol" --tag "9" --floating true
 
 # MPV fullscreen on tag 2
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add \
+~/.local/s1barch/scripts/dwm/window_rules.sh add \
     --class "mpv" --tag "2" --fullscreen true
 ```
 
@@ -193,28 +193,28 @@ DWM autostart configuration for automatic application launch on login.
 
 ### Script
 
-**Location:** `~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh`
+**Location:** `~/.local/s1barch/scripts/dwm/autostart.sh`
 
 ### Usage
 
 ```bash
 # Show current autostart entries
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh list
+~/.local/s1barch/scripts/dwm/autostart.sh list
 
 # Add new autostart entry
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh add "firefox"
+~/.local/s1barch/scripts/dwm/autostart.sh add "firefox"
 
 # Add autostart with options
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add "alacritty" --background
+~/.local/s1barch/scripts/dwm/window_rules.sh add "alacritty" --background
 
 # Remove autostart entry
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh remove "firefox"
+~/.local/s1barch/scripts/dwm/autostart.sh remove "firefox"
 
 # Clear all autostart entries
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh clear
+~/.local/s1barch/scripts/dwm/autostart.sh clear
 
 # Test autostart (run without restarting DWM)
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh test
+~/.local/s1barch/scripts/dwm/autostart.sh test
 ```
 
 ### Autostart Configuration File
@@ -254,16 +254,16 @@ setxkbmap -option grp:alt_shift_toggle
 
 ```bash
 # Add Firefox
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh add "firefox"
+~/.local/s1barch/scripts/dwm/autostart.sh add "firefox"
 
 # Add Slack
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh add "slack"
+~/.local/s1barch/scripts/dwm/autostart.sh add "slack"
 
 # Add custom script
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh add "/path/to/script.sh"
+~/.local/s1barch/scripts/dwm/autostart.sh add "/path/to/script.sh"
 
 # Add application with arguments
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh add "alacritty -e tmux"
+~/.local/s1barch/scripts/dwm/autostart.sh add "alacritty -e tmux"
 ```
 
 ---
@@ -314,8 +314,8 @@ DWM status bar is configured in `~/.config/dwm/dwm_bar.sh`:
 # Status bar information
 STATUS=""
 STATUS="$STATUS $(date '+%Y-%m-%d %H:%M:%S')"
-STATUS="$STATUS | $(~/Desktop/S1Bs1stem/scripts/networking/network_status.sh)"
-STATUS="$STATUS | $(~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh)"
+STATUS="$STATUS | $(~/.local/s1barch/scripts/networking/network_status.sh)"
+STATUS="$STATUS | $(~/.local/s1barch/scripts/audio/audio_status.sh)"
 
 # Set status
 xsetroot -name "$STATUS"
@@ -329,41 +329,41 @@ xsetroot -name "$STATUS"
 
 ```bash
 # Terminal on tag 1
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 1
+~/.local/s1barch/scripts/dwm/window_control.sh tag 1
 alacritty -e tmux
 
 # Browser on tag 2
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 2
+~/.local/s1barch/scripts/dwm/window_control.sh tag 2
 firefox
 
 # Code editor on tag 3
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 3
+~/.local/s1barch/scripts/dwm/window_control.sh tag 3
 vscodium
 
 # Quick switch between tags
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 1
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 2
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 3
+~/.local/s1barch/scripts/dwm/window_control.sh tag 1
+~/.local/s1barch/scripts/dwm/window_control.sh tag 2
+~/.local/s1barch/scripts/dwm/window_control.sh tag 3
 ```
 
 ### Monitor Workflow
 
 ```bash
 # Move window to second monitor
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh move-next-monitor
+~/.local/s1barch/scripts/dwm/window_control.sh move-next-monitor
 
 # Focus previous monitor
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh focus-prev-monitor
+~/.local/s1barch/scripts/dwm/window_control.sh focus-prev-monitor
 
 # Toggle tag view on both monitors
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggleview 1
+~/.local/s1barch/scripts/dwm/window_control.sh toggleview 1
 ```
 
 ### Window Management Workflow
 
 ```bash
 # Start with tiled layout
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh layout tiled
+~/.local/s1barch/scripts/dwm/window_control.sh layout tiled
 
 # Open multiple terminals
 alacritty &
@@ -371,14 +371,14 @@ alacritty &
 alacritty &
 
 # Switch between windows
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh next
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh prev
+~/.local/s1barch/scripts/dwm/window_control.sh next
+~/.local/s1barch/scripts/dwm/window_control.sh prev
 
 # Make terminal floating
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-float
+~/.local/s1barch/scripts/dwm/window_control.sh toggle-float
 
 # Toggle fullscreen
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-fullscreen
+~/.local/s1barch/scripts/dwm/window_control.sh toggle-fullscreen
 ```
 
 ---
@@ -417,10 +417,10 @@ dwm &
 xprop | grep WM_CLASS
 
 # Check current rules
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh list
+~/.local/s1barch/scripts/dwm/window_rules.sh list
 
 # Add correct rule with exact class
-~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add \
+~/.local/s1barch/scripts/dwm/window_rules.sh add \
     --class "CorrectClass" --tag "1" --floating false
 ```
 
@@ -439,7 +439,7 @@ ls -l ~/.config/dwm/autostart.sh
 chmod +x ~/.config/dwm/autostart.sh
 
 # Test autostart
-~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh test
+~/.local/s1barch/scripts/dwm/autostart.sh test
 
 # Check autostart file content
 cat ~/.config/dwm/autostart.sh
@@ -481,7 +481,7 @@ xrandr
 xrandr --output HDMI-1 --auto --right-of eDP-1
 
 # Test monitor switching
-~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh move-next-monitor
+~/.local/s1barch/scripts/dwm/window_control.sh move-next-monitor
 ```
 
 ---
@@ -563,17 +563,17 @@ dwm &
 
 | Task | Command |
 |:---|:---:|
-| **Next Window** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh next` |
-| **Prev Window** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh prev` |
-| **Kill Window** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh kill` |
-| **Toggle Float** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-float` |
-| **Toggle Fullscreen** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh toggle-fullscreen` |
-| **Switch Tag 1** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh tag 1` |
-| **Move to Tag 1** | `~/Desktop/S1Bs1stem/scripts/dwm/window_control.sh movetotag 1` |
-| **Add Rule** | `~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh add ...` |
-| **List Rules** | `~/Desktop/S1Bs1stem/scripts/dwm/window_rules.sh list` |
-| **Add Autostart** | `~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh add ...` |
-| **List Autostart** | `~/Desktop/S1Bs1stem/scripts/dwm/autostart.sh list` |
+| **Next Window** | `~/.local/s1barch/scripts/dwm/window_control.sh next` |
+| **Prev Window** | `~/.local/s1barch/scripts/dwm/window_control.sh prev` |
+| **Kill Window** | `~/.local/s1barch/scripts/dwm/window_control.sh kill` |
+| **Toggle Float** | `~/.local/s1barch/scripts/dwm/window_control.sh toggle-float` |
+| **Toggle Fullscreen** | `~/.local/s1barch/scripts/dwm/window_control.sh toggle-fullscreen` |
+| **Switch Tag 1** | `~/.local/s1barch/scripts/dwm/window_control.sh tag 1` |
+| **Move to Tag 1** | `~/.local/s1barch/scripts/dwm/window_control.sh movetotag 1` |
+| **Add Rule** | `~/.local/s1barch/scripts/dwm/window_rules.sh add ...` |
+| **List Rules** | `~/.local/s1barch/scripts/dwm/window_rules.sh list` |
+| **Add Autostart** | `~/.local/s1barch/scripts/dwm/autostart.sh add ...` |
+| **List Autostart** | `~/.local/s1barch/scripts/dwm/autostart.sh list` |
 
 ---
 

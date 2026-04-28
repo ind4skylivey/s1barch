@@ -27,17 +27,17 @@ Complete troubleshooting guide for common issues in S1Bs1stem.
 
 ```bash
 # 1. Check script permissions
-ls -l ~/Desktop/S1Bs1stem/install/ORCHESTRA.sh
-chmod +x ~/Desktop/S1Bs1stem/install/ORCHESTRA.sh
+ls -l ~/.local/s1barch/install/ORCHESTRA.sh
+chmod +x ~/.local/s1barch/install/ORCHESTRA.sh
 
 # 2. Check for syntax errors
-bash -n ~/Desktop/S1Bs1stem/install/ORCHESTRA.sh
+bash -n ~/.local/s1barch/install/ORCHESTRA.sh
 
 # 3. Check dependencies
-bash ~/Desktop/S1Bs1stem/install/preflight/001_dependencies_check.sh
+bash ~/.local/s1barch/install/preflight/001_dependencies_check.sh
 
 # 4. Run with verbose output
-bash -x ~/Desktop/S1Bs1stem/install/ORCHESTRA.sh --interactive
+bash -x ~/.local/s1barch/install/ORCHESTRA.sh --interactive
 ```
 
 ### Preflight Checks Failing
@@ -107,7 +107,7 @@ ls -la ~/.zshrc
 grep -n "zsh_setup.sh" ~/.zshrc
 
 # Source manually
-source ~/Desktop/S1Bs1stem/scripts/shell/zsh_setup.sh
+source ~/.local/s1barch/scripts/shell/zsh_setup.sh
 
 # For Fish
 # Check if config.fish exists
@@ -117,7 +117,7 @@ ls -la ~/.config/fish/config.fish
 grep -n "fish_setup.fish" ~/.config/fish/config.fish
 
 # Source manually
-source ~/Desktop/S1Bs1stem/scripts/shell/fish_setup.fish
+source ~/.local/s1barch/scripts/shell/fish_setup.fish
 ```
 
 ---
@@ -266,12 +266,12 @@ upower -e
 upower -i $(upower -e | grep BAT)
 
 # 4. Check hardware detection functions
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 has_battery && echo "Battery found" || echo "No battery"
 get_battery_count
 
 # 5. Check if script is skipping battery detection
-bash -x ~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh 2>&1 | head -50
+bash -x ~/.local/s1barch/scripts/battery/battery_status.sh 2>&1 | head -50
 ```
 
 ### Lid Detection Issues (Laptops)
@@ -285,7 +285,7 @@ bash -x ~/Desktop/S1Bs1stem/scripts/battery/battery_status.sh 2>&1 | head -50
 
 ```bash
 # 1. Check lid switch
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 has_lid && echo "Lid detected" || echo "No lid"
 
 # 2. Check acpi button
@@ -313,7 +313,7 @@ sudo systemctl restart systemd-logind
 
 ```bash
 # 1. Check audio system detection
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 get_audio_system
 has_pulseaudio && echo "PulseAudio found" || echo "No PulseAudio"
 has_pipewire && echo "PipeWire found" || echo "No PipeWire"
@@ -328,7 +328,7 @@ get_audio_command
 pactl list sinks short
 
 # 5. Test audio control
-bash -x ~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh 2>&1 | head -50
+bash -x ~/.local/s1barch/scripts/audio/audio_status.sh 2>&1 | head -50
 ```
 
 ### Display/Brightness Issues (Laptops)
@@ -412,8 +412,8 @@ ping -c 4 archlinux.org
 nmcli dev show | grep DNS
 
 # 2. Switch DNS
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh cloudflare
-~/Desktop/S1Bs1stem/scripts/networking/dns_switch.sh google
+~/.local/s1barch/scripts/networking/dns_switch.sh cloudflare
+~/.local/s1barch/scripts/networking/dns_switch.sh google
 
 # 3. Flush DNS cache
 sudo systemctl restart systemd-resolved
@@ -437,13 +437,13 @@ nmcli connection modify <connection> ipv4.dns "1.1.1.1 8.8.8.8"
 
 ```bash
 # 1. Check VPN status
-~/Desktop/S1Bs1stem/scripts/networking/vpn_connect.sh status
+~/.local/s1barch/scripts/networking/vpn_connect.sh status
 
 # 2. Check VPN logs
 journalctl -u NetworkManager -n 100 | grep -i vpn
 
 # 3. Test VPN config file
-openvpn3 ~/Desktop/S1Bs1stem/.config/vpn/work.ovpn
+openvpn3 ~/.local/s1barch/.config/vpn/work.ovpn
 
 # 4. Check dependencies
 sudo pacman -S openvpn wireguard-tools
@@ -452,8 +452,8 @@ sudo pacman -S openvpn wireguard-tools
 sudo systemctl restart NetworkManager
 
 # 6. Kill and restart VPN
-~/Desktop/S1Bs1stem/scripts/networking/vpn_connect.sh kill
-~/Desktop/S1Bs1stem/scripts/networking/vpn_connect.sh --connect <config>
+~/.local/s1barch/scripts/networking/vpn_connect.sh kill
+~/.local/s1barch/scripts/networking/vpn_connect.sh --connect <config>
 ```
 
 ### Tailscale Issues
@@ -467,7 +467,7 @@ sudo systemctl restart NetworkManager
 
 ```bash
 # 1. Check Tailscale status
-~/Desktop/S1Bs1stem/scripts/networking/tailscale_toggle.sh status
+~/.local/s1barch/scripts/networking/tailscale_toggle.sh status
 
 # 2. Check Tailscale daemon
 systemctl status tailscaled
@@ -534,10 +534,10 @@ audio_toggle_mute
 command -v pactl
 
 # 3. Check audio status script
-bash -x ~/Desktop/S1Bs1stem/scripts/audio/audio_status.sh 2>&1 | head -50
+bash -x ~/.local/s1barch/scripts/audio/audio_status.sh 2>&1 | head -50
 
 # 4. Check audio control script
-bash -x ~/Desktop/S1Bs1stem/scripts/audio/audio_control.sh 2>&1 | head -50
+bash -x ~/.local/s1barch/scripts/audio/audio_control.sh 2>&1 | head -50
 
 # 5. Test volume control directly
 pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -556,7 +556,7 @@ pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 ```bash
 # 1. Check audio system detection
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 get_audio_system
 has_pulseaudio
 has_pipewire
@@ -603,10 +603,10 @@ command -v dmidecode || sudo pacman -S dmidecode
 command -v inxi || sudo pacman -S inxi
 
 # 2. Test system info script
-bash -x ~/Desktop/S1Bs1stem/scripts/system/system_info.sh 2>&1 | head -50
+bash -x ~/.local/s1barch/scripts/system/system_info.sh 2>&1 | head -50
 
 # 3. Check hardware detection functions
-source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+source ~/.local/s1barch/scripts/common/functions.sh
 has_battery
 has_lid
 get_audio_system
@@ -702,7 +702,7 @@ sudo pacman -Sc
 sudo pacman -Rns $(pacman -Qtdq)
 
 # 6. Run cleanup script
-~/Desktop/S1Bs1stem/scripts/system/cleanup.sh --full
+~/.local/s1barch/scripts/system/cleanup.sh --full
 
 # 7. Manual cleanup
 sudo rm -rf /var/cache/pacman/pkg/*
@@ -838,13 +838,13 @@ Test scripts with verbose output:
 
 ```bash
 # Test with debug output
-bash -x ~/Desktop/S1Bs1stem/scripts/<category>/<script>.sh 2>&1 | head -50
+bash -x ~/.local/s1barch/scripts/<category>/<script>.sh 2>&1 | head -50
 
 # Check syntax
-bash -n ~/Desktop/S1Bs1stem/scripts/<category>/<script>.sh
+bash -n ~/.local/s1barch/scripts/<category>/<script>.sh
 
 # Check dependencies
-bash ~/Desktop/S1Bs1stem/install/preflight/001_dependencies_check.sh
+bash ~/.local/s1barch/install/preflight/001_dependencies_check.sh
 ```
 
 ### Reset Installation
@@ -857,7 +857,7 @@ cp -r ~/.config ~/.config.backup
 cp -r ~/.local ~/.local.backup
 
 # 2. Remove S1Bs1stem
-rm -rf ~/Desktop/S1Bs1stem
+rm -rf ~/.local/s1barch
 
 # 3. Clone again
 cd ~/Desktop
@@ -901,7 +901,7 @@ If you can't resolve the issue:
 | **Battery not detected** | `upower -e` | `sudo pacman -S upower` |
 | **High CPU** | `top` | `killall <process>` |
 | **High memory** | `free -h` | `echo 3 \| sudo tee /proc/sys/vm/drop_caches` |
-| **Disk full** | `df -h` | `~/Desktop/S1Bs1stem/scripts/system/cleanup.sh --full` |
+| **Disk full** | `df -h` | `~/.local/s1barch/scripts/system/cleanup.sh --full` |
 
 ---
 
