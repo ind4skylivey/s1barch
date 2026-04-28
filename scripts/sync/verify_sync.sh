@@ -15,7 +15,7 @@ verify_dwm_sync() {
     log_info "Verifying DWM sync..."
     
     local dwm_config="$HOME/.config/dwm/config.h"
-    local s1b_config="$HOME/Desktop/S1Bs1stem/configs/dwm/config.h"
+    local s1b_config="$S1B_ROOT/configs/dwm/config.h"
     
     if [ -f "$dwm_config" ]; then
         log_success "DWM config found: $dwm_config"
@@ -57,7 +57,7 @@ verify_kitty_sync() {
 verify_workflows_sync() {
     log_info "Verifying workflows sync..."
     
-    local workflows_dir="$HOME/Desktop/S1Bs1stem/workflow"
+    local workflows_dir="$S1B_ROOT/workflow"
     
     if [ -d "$workflows_dir" ]; then
         local count

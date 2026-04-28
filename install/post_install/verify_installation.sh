@@ -122,10 +122,10 @@ fi
 check_section "S1Bs1stem Components"
 
 S1B_SCRIPTS=(
-    "$HOME/Desktop/S1Bs1stem/scripts/common/functions.sh: Common functions"
-    "$HOME/Desktop/S1Bs1stem/scripts/common/logger.sh: Logger"
-    "$HOME/Desktop/S1Bs1stem/scripts/detection/detect_env.sh: Detection"
-    "$HOME/Desktop/S1Bs1stem/scripts/sync/sync_from_s1b.sh: Sync layer"
+    "$S1B_ROOT/scripts/common/functions.sh: Common functions"
+    "$S1B_ROOT/scripts/common/logger.sh: Logger"
+    "$S1B_ROOT/scripts/detection/detect_env.sh: Detection"
+    "$S1B_ROOT/scripts/sync/sync_from_s1b.sh: Sync layer"
 )
 
 for script in "${S1B_SCRIPTS[@]}"; do
@@ -145,10 +145,10 @@ done
 check_section "Orchestration Scripts"
 
 ORCHESTRATION=(
-    "$HOME/Desktop/S1Bs1stem/scripts/rofi/setup.sh: Rofi setup"
-    "$HOME/Desktop/S1Bs1stem/scripts/waybar/setup.sh: Waybar setup"
-    "$HOME/Desktop/S1Bs1stem/scripts/display/setup.sh: Display setup"
-    "$HOME/Desktop/S1Bs1stem/scripts/workflow/setup.sh: Workflow setup"
+    "$S1B_ROOT/scripts/rofi/setup.sh: Rofi setup"
+    "$S1B_ROOT/scripts/waybar/setup.sh: Waybar setup"
+    "$S1B_ROOT/scripts/display/setup.sh: Display setup"
+    "$S1B_ROOT/scripts/workflow/setup.sh: Workflow setup"
 )
 
 for script in "${ORCHESTRATION[@]}"; do
@@ -163,16 +163,16 @@ done
 # Check 7: Workflows
 check_section "Workflows"
 
-if [ -d "$HOME/Desktop/S1Bs1stem/workflow" ]; then
+if [ -d "$S1B_ROOT/workflow" ]; then
     check_passed "Workflow directory exists"
     
-    if [ -d "$HOME/Desktop/S1Bs1stem/workflow/profiles" ]; then
+    if [ -d "$S1B_ROOT/workflow/profiles" ]; then
         check_passed "Workflow profiles exist"
     else
         check_warn "Workflow profiles not found"
     fi
     
-    if [ -d "$HOME/Desktop/S1Bs1stem/workflow/zellij/layouts" ]; then
+    if [ -d "$S1B_ROOT/workflow/zellij/layouts" ]; then
         check_passed "Zellij layouts exist"
     else
         check_warn "Zellij layouts not found"
@@ -202,8 +202,8 @@ fi
 check_section "File Permissions"
 
 # Check if S1Bs1stem scripts are executable
-if [ -d "$HOME/Desktop/S1Bs1stem/scripts" ]; then
-    NON_EXEC=$(find "$HOME/Desktop/S1Bs1stem/scripts" -name "*.sh" ! -executable | wc -l)
+if [ -d "$S1B_ROOT/scripts" ]; then
+    NON_EXEC=$(find "$S1B_ROOT/scripts" -name "*.sh" ! -executable | wc -l)
     if [ "$NON_EXEC" -eq 0 ]; then
         check_passed "All scripts executable"
     else

@@ -34,7 +34,7 @@ if [ -n "$DISPLAY" ]; then
 fi
 
 # 4. Actualizar current_env.yaml
-CURRENT_ENV_FILE="$HOME/Desktop/S1Bs1stem/config/current_env.yaml"
+CURRENT_ENV_FILE="$S1B_ROOT/config/current_env.yaml"
 ensure_dir_exists "$(dirname "$CURRENT_ENV_FILE")"
 
 cat > "$CURRENT_ENV_FILE" << 'EOF'
@@ -52,7 +52,7 @@ EOF
 log_success "Environment updated to Wayland"
 
 # 5. Sincronizar configs desde dotfiles-s1b
-SYNC_SCRIPT="$HOME/Desktop/S1Bs1stem/scripts/sync/sync_from_s1b.sh"
+SYNC_SCRIPT="$S1B_ROOT/scripts/sync/sync_from_s1b.sh"
 
 if [ -f "$SYNC_SCRIPT" ]; then
     log_info "Syncing Waybar config from dotfiles-s1b..."

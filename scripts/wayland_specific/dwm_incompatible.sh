@@ -11,7 +11,7 @@ source "$SCRIPT_DIR/../common/functions.sh"
 source "$SCRIPT_DIR/../common/logger.sh"
 source "$SCRIPT_DIR/../common/colors.sh"
 
-ENV_FILE="$HOME/Desktop/S1Bs1stem/config/current_env.yaml"
+ENV_FILE="$S1B_ROOT/config/current_env.yaml"
 CURRENT_ENV=$(grep "^current:" "$ENV_FILE" 2>/dev/null | cut -d: -f2)
 readonly CURRENT_ENV
 

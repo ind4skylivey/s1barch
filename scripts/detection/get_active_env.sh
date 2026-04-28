@@ -14,7 +14,7 @@ source "$SCRIPT_DIR/../common/logger.sh"
 source "$SCRIPT_DIR/../common/colors.sh"
 
 # Get current environment from config file
-CURRENT_ENV_FILE="$HOME/Desktop/S1Bs1stem/config/current_env.yaml"
+CURRENT_ENV_FILE="$S1B_ROOT/config/current_env.yaml"
 
 get_env() {
     if [ ! -f "$CURRENT_ENV_FILE" ]; then

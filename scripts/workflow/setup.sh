@@ -15,7 +15,7 @@ source "$SCRIPT_DIR/../common/colors.sh"
 # Configuration
 readonly DOTFILES_S1B="$HOME/Desktop/dotfiles-s1b"
 readonly WORKFLOW_SOURCE="$DOTFILES_S1B/workflow"
-readonly WORKFLOW_TARGET="$HOME/Desktop/S1Bs1stem/workflow"
+readonly WORKFLOW_TARGET="$S1B_ROOT/workflow"
 
 # Ensure directories exist
 ensure_dir_exists "$WORKFLOW_TARGET/profiles"

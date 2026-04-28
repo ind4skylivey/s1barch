@@ -25,7 +25,7 @@ DIRECTORIES=(
     "$HOME/.config/zellij"
     "$HOME/.config/zsh"
     "$HOME/.config/fish"
-    "$HOME/Desktop/S1Bs1stem/scripts"
+    "$S1B_ROOT/scripts"
     "$HOME/.local/bin"
 )
 
@@ -57,16 +57,16 @@ if [ -d "$HOME/.local/bin" ]; then
 fi
 
 # Set permissions for S1Bs1stem scripts
-if [ -d "$HOME/Desktop/S1Bs1stem/scripts" ]; then
+if [ -d "$S1B_ROOT/scripts" ]; then
     log_info "Setting S1Bs1stem scripts permissions..."
-    find "$HOME/Desktop/S1Bs1stem/scripts" -type f -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
+    find "$S1B_ROOT/scripts" -type f -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
     log_success "S1Bs1stem scripts permissions set"
 fi
 
 # Set permissions for S1Bs1stem install scripts
-if [ -d "$HOME/Desktop/S1Bs1stem/install" ]; then
+if [ -d "$S1B_ROOT/install" ]; then
     log_info "Setting S1Bs1stem install scripts permissions..."
-    find "$HOME/Desktop/S1Bs1stem/install" -type f -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
+    find "$S1B_ROOT/install" -type f -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
     log_success "S1Bs1stem install scripts permissions set"
 fi
 

@@ -229,7 +229,7 @@ generate_autostart_file() {
 # You can edit this file to customize autostart applications
 
 # Source S1Bs1stem autostart function
-source "$HOME/Desktop/S1Bs1stem/scripts/dwm/autostart.sh"
+source "$S1B_ROOT/scripts/dwm/autostart.sh"
 
 # Start all applications
 start_all

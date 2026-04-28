@@ -15,7 +15,7 @@ source "$SCRIPT_DIR/../common/colors.sh"
 
 # Configuration
 readonly DOTFILES_S1B="$HOME/Desktop/dotfiles-s1b"
-readonly CONFIG_CACHE="$HOME/Desktop/S1Bs1stem/config_cache"
+readonly CONFIG_CACHE="$S1B_ROOT/config_cache"
 readonly BACKUP_DIR="$HOME/.s1b_sync_backups"
 
 # Ensure directories exist
@@ -24,7 +24,7 @@ ensure_dir_exists "$BACKUP_DIR"
 
 # Get sync strategy from config
 get_sync_strategy() {
-    local config_file="$HOME/Desktop/S1Bs1stem/config/sync_config.yaml"
+    local config_file="$S1B_ROOT/config/sync_config.yaml"
     
     if [ -f "$config_file" ]; then
         grep "^sync_strategy:" "$config_file" 2>/dev/null | cut -d: -f2 | tr -d ' '
@@ -136,7 +136,7 @@ sync_workflows() {
     log_info "Syncing workflows from dotfiles-s1b..."
     
     local workflows_source="$DOTFILES_S1B/workflow"
-    local workflows_target="$HOME/Desktop/S1Bs1stem/workflow"
+    local workflows_target="$S1B_ROOT/workflow"
     
     if [ ! -d "$workflows_source" ]; then
         log_warn "Workflows not found in dotfiles-s1b"
@@ -199,10 +199,10 @@ sync_all() {
     # shellcheck disable=SC2034
     current_env=$(source "$SCRIPT_DIR/../detection/get_active_env.sh" && get_env)
     
-    if [ -f "$HOME/Desktop/S1Bs1stem/config/current_env.yaml" ]; then
-        sed -i "s/^last_sync:.*/last_sync: $(date -Iseconds)/" "$HOME/Desktop/S1Bs1stem/config/current_env.yaml"
+    if [ -f "$S1B_ROOT/config/current_env.yaml" ]; then
+        sed -i "s/^last_sync:.*/last_sync: $(date -Iseconds)/" "$S1B_ROOT/config/current_env.yaml"
     else
-        echo "last_sync: $(date -Iseconds)" >> "$HOME/Desktop/S1Bs1stem/config/current_env.yaml"
+        echo "last_sync: $(date -Iseconds)" >> "$S1B_ROOT/config/current_env.yaml"
     fi
     
     log_info "Sync complete: $synced synced, $failed failed"

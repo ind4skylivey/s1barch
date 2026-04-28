@@ -4,7 +4,8 @@
 #  Usage: s1b-snapshot [create|restore|list|delete] [name]
 #  ============================================================
 
-S1B_ROOT="$HOME/Desktop/S1Bs1stem"
+# Source functions for auto-detected S1B_ROOT
+S1B_ROOT="${S1B_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 
 case "${1:-help}" in
     create|c)

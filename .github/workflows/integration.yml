@@ -53,14 +53,15 @@ jobs:
     - name: Setup S1Bs1stem directory
       run: |
         echo "Setting up S1Bs1stem directory..."
-        cp -r "$GITHUB_WORKSPACE" "$HOME/Desktop/S1Bs1stem"
+        export S1B_ROOT="$GITHUB_WORKSPACE"
+        cp -r "$GITHUB_WORKSPACE" "$S1B_ROOT"
         
         # Create workflow directory structure
-        mkdir -p "$HOME/Desktop/S1Bs1stem/workflow"
-        mkdir -p "$HOME/Desktop/S1Bs1stem/workflow/profiles"
-        echo "# Workflow profiles" > "$HOME/Desktop/S1Bs1stem/workflow/profiles/.gitkeep"
+        mkdir -p "$S1B_ROOT/workflow"
+        mkdir -p "$S1B_ROOT/workflow/profiles"
+        echo "# Workflow profiles" > "$S1B_ROOT/workflow/profiles/.gitkeep"
         
-        ln -sf "$HOME/Desktop/S1Bs1stem" /tmp/S1Bs1stem
+        ln -sf "$S1B_ROOT" /tmp/S1Bs1stem
         
     - name: Setup S1B utility commands
       run: |
@@ -79,7 +80,7 @@ jobs:
     - name: Run existing test suite
       run: |
         echo "Running test suite..."
-        cd "$HOME/Desktop/S1Bs1stem"
+        cd "$S1B_ROOT"
         # Set USER environment variable
         export USER="${USER:-github}"
         # Add s1b commands to PATH
@@ -137,7 +138,7 @@ jobs:
     - name: Validate installation scripts
       run: |
         echo "Validating installation scripts..."
-        cd "$HOME/Desktop/S1Bs1stem"
+        cd "$S1B_ROOT"
         if [ -f "install/ORCHESTRA.sh" ]; then
           chmod +x install/ORCHESTRA.sh
           ./install/ORCHESTRA.sh --help || true
@@ -147,7 +148,7 @@ jobs:
     - name: Check script dependencies
       run: |
         echo "Checking script dependencies..."
-        cd "$HOME/Desktop/S1Bs1stem"
+        cd "$S1B_ROOT"
         if [ -d "scripts" ]; then
           find scripts -name "*.sh" -type f | while read -r file; do
             if grep -q "curl\|wget\|git\|pacman" "$file"; then

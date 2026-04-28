@@ -12,7 +12,7 @@ source "$SCRIPT_DIR/../common/logger.sh"
 source "$SCRIPT_DIR/../common/colors.sh"
 
 # Check environment
-ENV_FILE="$HOME/Desktop/S1Bs1stem/config/current_env.yaml"
+ENV_FILE="$S1B_ROOT/config/current_env.yaml"
 CURRENT_ENV=$(cat "$ENV_FILE" 2>/dev/null | grep "^current:" | cut -d: -f2 | tr -d ' ')
 readonly CURRENT_ENV
 

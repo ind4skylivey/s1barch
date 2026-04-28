@@ -2,7 +2,7 @@
 # ============================================================
 #  S1Bs1stem - COMMON FUNCTIONS LIBRARY
 #  ============================================================
-#  Usage: source ~/Desktop/S1Bs1stem/scripts/common/functions.sh
+#  Usage: source "$(dirname "$0")/../scripts/common/functions.sh"
 #  Inspired by: S1B dotfiles
 #  Author: S1B System
 #  License: MIT
@@ -10,7 +10,11 @@
 #  ============================================================
 
 # --- CONSTANTS ---
-readonly S1B_ROOT="$HOME/Desktop/S1Bs1stem"
+# Auto-detect S1B_ROOT from script location, allow override via environment
+if [ -z "$S1B_ROOT" ]; then
+    S1B_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+fi
+readonly S1B_ROOT
 # shellcheck disable=SC2034
 readonly S1B_SCRIPTS="$S1B_ROOT/scripts"
 # shellcheck disable=SC2034

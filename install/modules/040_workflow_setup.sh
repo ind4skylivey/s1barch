@@ -141,7 +141,7 @@ fi
 log_info "Switching to workflow: $WORKFLOW_NAME"
 
 # Load workflow profile
-WORKFLOW_FILE="$HOME/Desktop/S1Bs1stem/workflow/profiles/${WORKFLOW_NAME}.md"
+WORKFLOW_FILE="$S1B_ROOT/workflow/profiles/${WORKFLOW_NAME}.md"
 
 if [ -f "$WORKFLOW_FILE" ]; then
     # Set environment variables from profile
@@ -182,7 +182,7 @@ cat > "$WORKFLOW_MENU" << 'EOFM'
 # Eco-Workflow Menu
 # Usage: Launch with Rofi
 
-WORKFLOW_DIR="$HOME/Desktop/S1Bs1stem/workflow"
+WORKFLOW_DIR="$S1B_ROOT/workflow"
 WORKFLOW_SWITCHER="$WORKFLOW_DIR/scripts/switch_workflow.sh"
 
 WORKFACES=(
@@ -213,8 +213,8 @@ cat > "$ALIASES_FILE" << 'EOFA'
 # Source this file in your .zshrc or .bashrc
 
 # Workflow Switcher
-alias ws-switch='$HOME/Desktop/S1Bs1stem/scripts/workflow/switch_workflow.sh'
-alias ws-menu='$HOME/Desktop/S1Bs1stem/scripts/workflow/ws-menu.sh'
+alias ws-switch='$S1B_ROOT/scripts/workflow/switch_workflow.sh'
+alias ws-menu='$S1B_ROOT/scripts/workflow/ws-menu.sh'
 
 # Quick Workflow Access
 alias ws-local='ws-switch local'
@@ -223,7 +223,7 @@ alias ws-write='ws-switch write'
 alias ws-redteam='ws-switch redteam'
 
 # Workflow Profiles
-alias ws-info='cat $HOME/Desktop/S1Bs1stem/workflow/profiles/$1.md 2>/dev/null || echo "Profile not found"'
+alias ws-info='cat $S1B_ROOT/workflow/profiles/$1.md 2>/dev/null || echo "Profile not found"'
 EOFA
 
 # Add to .zshrc

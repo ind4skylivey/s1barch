@@ -49,7 +49,7 @@ CONFIG_LOCATIONS=(
     "$HOME/.config/fish"
     "$HOME/.config/nvim"
     "$HOME/.config/emacs"
-    "$HOME/Desktop/S1Bs1stem/workflow"
+    "$S1B_ROOT/workflow"
     "$HOME/.zshrc"
     "$HOME/.p10k.zsh"
 )

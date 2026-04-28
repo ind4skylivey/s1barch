@@ -27,7 +27,7 @@ if [ -d "$HOME/Desktop/dotfiles-s1b" ]; then
     log_info "Syncing Warp configs from dotfiles-s1b..."
     
     # Execute Warp orchestration script
-    "$HOME/Desktop/S1Bs1stem/scripts/warp/setup.sh"
+    "$S1B_ROOT/scripts/warp/setup.sh"
 else
     log_warn "dotfiles-s1b not found, skipping Warp configs..."
 fi

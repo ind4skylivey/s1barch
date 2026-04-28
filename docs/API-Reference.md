@@ -1194,7 +1194,7 @@ static const char *colors[][3] = {
 
 ```bash
 # Project root
-S1B_ROOT="$HOME/Desktop/S1Bs1stem"
+S1B_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"  # Auto-detect
 
 # Scripts directory
 S1B_SCRIPTS="$S1B_ROOT/scripts"

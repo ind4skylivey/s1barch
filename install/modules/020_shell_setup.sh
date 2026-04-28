@@ -119,9 +119,9 @@ fi
 if ! grep -q "S1Bs1stem" "$ZSHRC_FILE" 2>/dev/null; then
     echo "" >> "$ZSHRC_FILE"
     echo "# S1Bs1stem Common Functions" >> "$ZSHRC_FILE"
-    echo "source $HOME/Desktop/S1Bs1stem/scripts/common/functions.sh" >> "$ZSHRC_FILE"
-    echo "source $HOME/Desktop/S1Bs1stem/scripts/common/logger.sh" >> "$ZSHRC_FILE"
-    echo "source $HOME/Desktop/S1Bs1stem/scripts/common/colors.sh" >> "$ZSHRC_FILE"
+    echo "source $S1B_ROOT/scripts/common/functions.sh" >> "$ZSHRC_FILE"
+    echo "source $S1B_ROOT/scripts/common/logger.sh" >> "$ZSHRC_FILE"
+    echo "source $S1B_ROOT/scripts/common/colors.sh" >> "$ZSHRC_FILE"
     log_success "S1Bs1stem functions added to .zshrc"
 fi
 

@@ -28,13 +28,13 @@ ISSUES_FOUND=0
 # Validate Executables
 echo "${COLOR_BOLD}${COLOR_Mauve}Validating Executables:${COLOR_RESET}"
 
-NON_EXEC_S1B=$(find "$HOME/Desktop/S1Bs1stem/scripts" -name "*.sh" ! -executable | wc -l)
+NON_EXEC_S1B=$(find "$S1B_ROOT/scripts" -name "*.sh" ! -executable | wc -l)
 readonly NON_EXEC_S1B
 if [ "$NON_EXEC_S1B" -gt 0 ]; then
     echo "${COLOR_RED}✗${COLOR_RESET} $NON_EXEC_S1B non-executable scripts in S1Bs1stem"
     ISSUES_FOUND=$((ISSUES_FOUND + 1))
     if [ "$FIX_MODE" == true ]; then
-        find "$HOME/Desktop/S1Bs1stem/scripts" -name "*.sh" ! -executable -exec chmod +x {} \;
+        find "$S1B_ROOT/scripts" -name "*.sh" ! -executable -exec chmod +x {} \;
         echo "${COLOR_GREEN}  Fixed${COLOR_RESET}"
     fi
 fi
@@ -97,8 +97,8 @@ REQUIRED_DIRS=(
     "$HOME/.config"
     "$HOME/.config/dwm"
     "$HOME/.config/waybar"
-    "$HOME/Desktop/S1Bs1stem/scripts"
-    "$HOME/Desktop/S1Bs1stem/install"
+    "$S1B_ROOT/scripts"
+    "$S1B_ROOT/install"
 )
 
 for dir in "${REQUIRED_DIRS[@]}"; do

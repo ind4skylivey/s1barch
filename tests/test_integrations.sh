@@ -86,7 +86,7 @@ echo ""
 echo "${COLOR_BOLD}${COLOR_Mauve}Workflow Integration:${COLOR_RESET}"
 
 test_start "Workflow profiles syncable"
-if [ -d "$HOME/Desktop/dotfiles-s1b/workflow" ] || [ -d "$HOME/Desktop/S1Bs1stem/workflow" ]; then
+if [ -d "$HOME/Desktop/dotfiles-s1b/workflow" ] || [ -d "$S1B_ROOT/workflow" ]; then
     test_pass
 else
     test_fail "No workflow profiles found"

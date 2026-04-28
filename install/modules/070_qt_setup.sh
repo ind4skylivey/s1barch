@@ -27,7 +27,7 @@ if [ -d "$HOME/Desktop/dotfiles-s1b" ]; then
     log_info "Syncing Qt configs from dotfiles-s1b..."
     
     # Execute Qt orchestration script
-    "$HOME/Desktop/S1Bs1stem/scripts/qt/setup.sh"
+    "$S1B_ROOT/scripts/qt/setup.sh"
 else
     log_warn "dotfiles-s1b not found, skipping Qt configs..."
 fi

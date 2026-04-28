@@ -127,8 +127,8 @@ test_step "Verify env file" "[[ -f /tmp/test_env.yaml ]]"
 # Test workflow scripts exist
 WORKFLOWS=("ws-local" "ws-remote" "ws-write" "ws-redteam")
 for wf in "${WORKFLOWS[@]}"; do
-    if [[ -f "$HOME/Desktop/S1Bs1stem/scripts/workflow/$wf.sh" ]]; then
-        test_step "Workflow exists: $wf" "[[ -f $HOME/Desktop/S1Bs1stem/scripts/workflow/$wf.sh ]]"
+    if [[ -f "$S1B_ROOT/scripts/workflow/$wf.sh" ]]; then
+        test_step "Workflow exists: $wf" "[[ -f $S1B_ROOT/scripts/workflow/$wf.sh ]]"
     else
         echo -e "$WARN Workflow wrapper: $wf (optional)"
         WARNINGS=$((WARNINGS + 1))

@@ -39,7 +39,7 @@ echo ""
 echo "${COLOR_BOLD}${COLOR_Mauve}Common Functions:${COLOR_RESET}"
 for func in functions logger colors rollback; do
     test_start "$func.sh"
-    if [ -f "$HOME/Desktop/S1Bs1stem/scripts/common/$func.sh" ]; then
+    if [ -f "$S1B_ROOT/scripts/common/$func.sh" ]; then
         test_pass
     else
         test_fail "File not found"
@@ -51,7 +51,7 @@ echo ""
 echo "${COLOR_BOLD}${COLOR_Mauve}Detection Layer:${COLOR_RESET}"
 for script in detect_env detect_services get_active_env; do
     test_start "$script.sh"
-    if [ -f "$HOME/Desktop/S1Bs1stem/scripts/detection/$script.sh" ] && [ -x "$HOME/Desktop/S1Bs1stem/scripts/detection/$script.sh" ]; then
+    if [ -f "$S1B_ROOT/scripts/detection/$script.sh" ] && [ -x "$S1B_ROOT/scripts/detection/$script.sh" ]; then
         test_pass
     else
         test_fail "Not executable"
@@ -63,7 +63,7 @@ echo ""
 echo "${COLOR_BOLD}${COLOR_Mauve}Sync Layer:${COLOR_RESET}"
 for script in sync_from_s1b verify_sync; do
     test_start "$script.sh"
-    if [ -f "$HOME/Desktop/S1Bs1stem/scripts/sync/$script.sh" ] && [ -x "$HOME/Desktop/S1Bs1stem/scripts/sync/$script.sh" ]; then
+    if [ -f "$S1B_ROOT/scripts/sync/$script.sh" ] && [ -x "$S1B_ROOT/scripts/sync/$script.sh" ]; then
         test_pass
     else
         test_fail "Not executable"
@@ -75,7 +75,7 @@ echo ""
 echo "${COLOR_BOLD}${COLOR_Mauve}Orchestration:${COLOR_RESET}"
 for category in rofi waybar display workflow; do
     test_start "$category/setup.sh"
-    if [ -f "$HOME/Desktop/S1Bs1stem/scripts/$category/setup.sh" ] && [ -x "$HOME/Desktop/S1Bs1stem/scripts/$category/setup.sh" ]; then
+    if [ -f "$S1B_ROOT/scripts/$category/setup.sh" ] && [ -x "$S1B_ROOT/scripts/$category/setup.sh" ]; then
         test_pass
     else
         test_fail "Not executable"
@@ -87,7 +87,7 @@ echo ""
 echo "${COLOR_BOLD}${COLOR_Mauve}Rollback:${COLOR_RESET}"
 for script in snapshot_create snapshot_restore snapshot_list snapshot_delete; do
     test_start "$script.sh"
-    if [ -f "$HOME/Desktop/S1Bs1stem/scripts/rollback/$script.sh" ] && [ -x "$HOME/Desktop/S1Bs1stem/scripts/rollback/$script.sh" ]; then
+    if [ -f "$S1B_ROOT/scripts/rollback/$script.sh" ] && [ -x "$S1B_ROOT/scripts/rollback/$script.sh" ]; then
         test_pass
     else
         test_fail "Not executable"
