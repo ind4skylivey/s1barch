@@ -229,7 +229,7 @@ main() {
     preflight_check
     
     # --- STEP 1: Environment Selection ---
-    log_info "Step 1/5: Environment Selection"
+    log_info "Step 1/6: Environment Selection"
     source "$SCRIPT_DIR/preflight/000_environment_selector.sh"
     
     # Read selection
@@ -242,8 +242,22 @@ main() {
         exit 1
     fi
     
-    # --- STEP 2: Base Modules (ALWAYS EXECUTE) ---
-    log_info "Step 2/5: Installing Base Modules..."
+    # --- STEP 2: User Profile Selection ---
+    log_info "Step 2/6: User Profile Selection"
+    source "$SCRIPT_DIR/preflight/004_user_profile_selector.sh"
+    
+    # Read profile selection
+    if [ -f "$SCRIPT_DIR/.user_profile" ]; then
+        # shellcheck source=/dev/null
+        source "$SCRIPT_DIR/.user_profile"
+        log_info "User Profile: $USER_PROFILE"
+    else
+        log_error "User profile selection failed!"
+        exit 1
+    fi
+    
+    # --- STEP 3: Base Modules (ALWAYS EXECUTE) ---
+    log_info "Step 3/6: Installing Base Modules..."
     source "$SCRIPT_DIR/preflight/001_dependencies_check.sh"
     source "$SCRIPT_DIR/preflight/002_disk_space_check.sh"
     source "$SCRIPT_DIR/preflight/003_network_check.sh"
@@ -251,8 +265,8 @@ main() {
     source "$SCRIPT_DIR/modules/020_shell_setup.sh"
     source "$SCRIPT_DIR/modules/030_terminal_setup.sh"
     
-    # --- STEP 3: Environment-Specific Modules ---
-    log_info "Step 3/5: Installing Environment-Specific Modules..."
+    # --- STEP 4: Environment-Specific Modules ---
+    log_info "Step 4/6: Installing Environment-Specific Modules..."
     
     if [ "$INSTALL_MODE" = "custom" ]; then
         # Custom mode: load individual selections
@@ -328,9 +342,9 @@ main() {
         fi
     fi
     
-    # --- STEP 4: Shared Modules (ALWAYS EXECUTE in non-custom mode) ---
+    # --- STEP 5: Shared Modules (ALWAYS EXECUTE in non-custom mode) ---
     if [ "$INSTALL_MODE" != "custom" ]; then
-        log_info "Step 4/5: Installing Shared Modules..."
+        log_info "Step 5/6: Installing Shared Modules..."
         source "$SCRIPT_DIR/modules/070_qt_setup.sh"
         source "$SCRIPT_DIR/modules/071_warp_setup.sh"
         source "$SCRIPT_DIR/../scripts/browser/setup.sh"
@@ -341,8 +355,8 @@ main() {
         source "$SCRIPT_DIR/modules/040_workflow_setup.sh"
     fi
     
-    # --- STEP 5: Post-Install ---
-    log_info "Step 5/5: Post-Install Configuration..."
+    # --- STEP 6: Post-Install ---
+    log_info "Step 6/6: Post-Install Configuration..."
     if [ -f "$SCRIPT_DIR/modules/090_final_cleanup.sh" ]; then
         source "$SCRIPT_DIR/modules/090_final_cleanup.sh"
     fi
