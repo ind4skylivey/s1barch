@@ -19,9 +19,8 @@ jobs:
         
     - name: Run Gitleaks
       uses: zricethezav/gitleaks-action@v2
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITLEAKS_LICENSE: ""
         
     - name: Check .gitignore security patterns
