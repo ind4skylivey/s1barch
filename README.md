@@ -8,7 +8,7 @@
 
  [![Arch Linux](https://img.shields.io/badge/Arch_Linux-Distro-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white)](https://archlinux.org)
  [![Version](https://img.shields.io/badge/Version-1.6.0-blue?style=for-the-badge)](https://github.com/ind4skylivey/s1barch/releases)
- [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+ [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue?style=for-the-badge)](LICENSE)
  [![Maintained](https://img.shields.io/badge/Maintained-Yes-2ea44f?style=for-the-badge)](https://github.com/ind4skylivey/s1barch)
  [![DWM](https://img.shields.io/badge/DWM-Patched-blueviolet?style=for-the-badge)](https://dwm.suckless.org/)
  [![Zellij](https://img.shields.io/badge/Zellij-Workflow-orange?style=for-the-badge&logo=zellij)](https://zellij.dev)
@@ -357,11 +357,6 @@ Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md)
 | **Pre-flight Checks** | Include pre-flight checks in all scripts |
 | **Documentation** | Document functions with comments |
 
----
-
-## 📝 License
-
-This project is licensed under the GPL-3.0-or-later - see the [LICENSE](LICENSE) file for details.
 
 ---
 
